@@ -1,108 +1,432 @@
 # Pages CMS setup for the Brave Heart website.
-# This file tells Pages CMS which parts of the site Laura can edit.
+# Puppies and Reviews are lists; "Website text" holds the wording of every section of the page.
 
 media:
-  - name: puppies
-    label: Puppy photos
-    input: images/puppies
-    output: /images/puppies
-    rename: safe
-    extensions: [jpg, jpeg, png, webp]
-
+- name: puppies
+  label: Puppy photos
+  input: images/puppies
+  output: /images/puppies
+  rename: safe
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
+- name: site
+  label: Website photos
+  input: images/site
+  output: /images/site
+  rename: safe
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
 content:
-  - name: puppies
-    label: Puppies
+- name: puppies
+  label: Puppies
+  type: file
+  path: data/puppies.json
+  format: json
+  list: true
+  fields:
+  - name: name
+    label: Name
+    type: string
+    required: true
+  - name: status
+    label: Status
+    type: select
+    required: true
+    default: available
+    description: Choose "Went home" instead of deleting, so the puppy shows in the "Recently went home" row.
+    options:
+      values:
+      - name: available
+        label: Available
+      - name: reserved
+        label: Reserved
+      - name: went-home
+        label: Went home
+  - name: born
+    label: Birth date
+    type: date
+    required: true
+    description: The age on the website updates by itself.
+    options:
+      format: yyyy-MM-dd
+  - name: price
+    label: Price in USD
+    type: number
+    description: The full price, including the $1,000 deposit. Leave empty to show "Price on request".
+  - name: sex
+    label: Sex
+    type: select
+    options:
+      values:
+      - name: Female
+        label: Female
+      - name: Male
+        label: Male
+  - name: color
+    label: Color
+    type: select
+    options:
+      values:
+      - name: Blenheim
+        label: Blenheim
+      - name: Tri-color
+        label: Tri-color
+  - name: photos
+    label: Photos
+    type: image
+    description: Up to 6 photos. The first one is shown on the card.
+    options:
+      media: puppies
+      multiple:
+        max: 6
+  - name: note
+    label: Short note (optional)
+    type: string
+    description: One line for buyers, for example "Loves cuddles, great with kids".
+- name: reviews
+  label: Reviews
+  type: file
+  path: data/reviews.json
+  format: json
+  list: true
+  fields:
+  - name: name
+    label: Name as shown (for example "Anna B.")
+    type: string
+    required: true
+  - name: date
+    label: Month and year (for example "May 2026")
+    type: string
+  - name: text
+    label: Review
+    type: text
+    required: true
+- name: website-text
+  label: Website text
+  type: group
+  items:
+  - name: home
+    label: 1. Top of page
     type: file
-    path: data/puppies.json
+    path: data/content/home.json
     format: json
-    list: true
     fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Introduction
+      type: text
+    - name: buttonPuppies
+      label: Button 1 text
+      type: string
+    - name: buttonApply
+      label: Button 2 text
+      type: string
+    - name: photo
+      label: Main photo
+      type: image
+      options:
+        media: site
+    - name: photoAlt
+      label: Photo description
+      type: string
+      description: Describes the photo for people using screen readers and for Google.
+    - name: quote
+      label: Short review quote
+      type: string
+      description: Leave empty to hide the quote.
+    - name: quoteAuthor
+      label: Quote author
+      type: string
+    - name: stats
+      label: Highlights bar
+      type: object
+      list: true
+      description: Up to 4 works best. A value starting with a number (like "15 years") counts up when it appears.
+      fields:
+      - name: value
+        label: Value
+        type: string
+        required: true
+      - name: label
+        label: Label
+        type: string
+  - name: puppies-section
+    label: 2. Available puppies (section text)
+    type: file
+    path: data/content/puppies-section.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Introduction
+      type: text
+    - name: emptyText
+      label: Message when no puppies are listed
+      type: text
+    - name: goneTitle
+      label: Heading for puppies that went home
+      type: string
+    - name: priceNote
+      label: Price note
+      type: text
+  - name: about
+    label: 3. Meet the breeder
+    type: file
+    path: data/content/about.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: subtitle
+      label: Line under the heading
+      type: string
+    - name: text
+      label: About text
+      type: text
+      description: Leave an empty line between paragraphs.
+    - name: facts
+      label: Quick facts
+      type: object
+      list: true
+      fields:
+      - name: label
+        label: Label
+        type: string
+        required: true
+      - name: value
+        label: Value
+        type: string
+    - name: showTitle
+      label: Show ring heading
+      type: string
+    - name: showText
+      label: Show ring text
+      type: text
+    - name: dogs
+      label: Featured dogs
+      type: object
+      list: true
+      fields:
+      - name: role
+        label: Small label (for example "Our stud")
+        type: string
       - name: name
         label: Name
         type: string
         required: true
-      - name: status
-        label: Status
-        type: select
-        required: true
-        default: available
-        description: Choose "Went home" instead of deleting, so the puppy shows in the "Recently went home" row.
-        options:
-          values:
-            - name: available
-              label: Available
-            - name: reserved
-              label: Reserved
-            - name: went-home
-              label: Went home
-      - name: born
-        label: Birth date
-        type: date
-        required: true
-        description: The age on the website updates by itself.
-        options:
-          format: yyyy-MM-dd
-      - name: price
-        label: Price in USD
-        type: number
-        description: The full price, including the $1,000 deposit. Leave empty to show "Price on request".
-      - name: sex
-        label: Sex
-        type: select
-        options:
-          values:
-            - name: Female
-              label: Female
-            - name: Male
-              label: Male
-      - name: color
-        label: Color
-        type: select
-        options:
-          values:
-            - name: Blenheim
-              label: Blenheim
-            - name: Tri-color
-              label: Tri-color
-      - name: photos
-        label: Photos
-        type: image
-        description: Up to 6 photos. The first one is shown on the card.
-        options:
-          media: puppies
-          multiple:
-            max: 6
-      - name: note
-        label: Short note (optional)
+      - name: wins
+        label: Show wins
         type: string
-        description: One line for buyers, for example "Loves cuddles, great with kids".
-
-  - name: reviews
-    label: Reviews
-    type: file
-    path: data/reviews.json
-    format: json
-    list: true
-    fields:
-      - name: name
-        label: Name as shown (for example "Anna B.")
-        type: string
-        required: true
-      - name: date
-        label: Month and year (for example "May 2026")
-        type: string
+        list: true
       - name: text
-        label: Review
+        label: Description
         type: text
-        required: true
-
-  - name: settings
-    label: Website settings
+  - name: health
+    label: 4. Health
     type: file
-    path: data/settings.json
+    path: data/content/health.json
     format: json
     fields:
-      - name: applicationsUrl
-        label: Application email service address
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Introduction
+      type: text
+    - name: badge
+      label: Badge
+      type: string
+      description: Leave empty to hide it.
+    - name: parentTitle
+      label: Parent testing heading
+      type: string
+    - name: parentTests
+      label: Parent tests
+      type: object
+      list: true
+      fields:
+      - name: title
+        label: Title
         type: string
-        description: The Google Apps Script web app address that ends in /exec (see SETUP.md, step 5). Leave empty to turn off automatic emails.
+        required: true
+      - name: text
+        label: Text
+        type: text
+    - name: puppyTitle
+      label: Puppy items heading
+      type: string
+    - name: puppyItems
+      label: What every puppy goes home with
+      type: object
+      list: true
+      fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: text
+        label: Text
+        type: text
+    - name: raisedTitle
+      label: Socialization heading
+      type: string
+    - name: raisedText
+      label: Socialization text
+      type: text
+    - name: raisedChips
+      label: Socialization tags
+      type: string
+      list: true
+  - name: process
+    label: 5. How it works
+    type: file
+    path: data/content/process.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Introduction
+      type: text
+    - name: steps
+      label: Steps
+      type: object
+      list: true
+      description: Four steps fit best.
+      fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: text
+        label: Text
+        type: text
+  - name: reviews-section
+    label: 6. Reviews (section text)
+    type: file
+    path: data/content/reviews-section.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: badge
+      label: Badge
+      type: string
+    - name: sourceText
+      label: Link text under the reviews
+      type: string
+  - name: contact
+    label: 7. Contact
+    type: file
+    path: data/content/contact.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Introduction
+      type: text
+    - name: cards
+      label: Contact cards
+      type: object
+      list: true
+      description: The first card with an email address is also used for the application email link.
+      fields:
+      - name: who
+        label: Name or label (for example "Eugene")
+        type: string
+      - name: value
+        label: Phone number or email
+        type: string
+        required: true
+      - name: how
+        label: Note (for example "Text messages only")
+        type: string
+  - name: application
+    label: 8. Application (texts)
+    type: file
+    path: data/content/application.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Introduction
+      type: text
+    - name: disclaimer
+      label: Note beside the form
+      type: text
+    - name: thankYouTitle
+      label: Thank-you heading
+      type: string
+    - name: thankYouText
+      label: Thank-you text
+      type: text
+    - name: sentMessage
+      label: Message after sending
+      type: text
+      description: Write {email} where the applicant's email address should appear.
+    - name: fallbackMessage
+      label: Message if sending fails
+      type: text
+  - name: footer
+    label: 9. Footer
+    type: file
+    path: data/content/footer.json
+    format: json
+    fields:
+    - name: tagline
+      label: Short description
+      type: text
+    - name: bottomLine
+      label: Bottom line (copyright)
+      type: string
+- name: settings
+  label: Website settings
+  type: file
+  path: data/settings.json
+  format: json
+  fields:
+  - name: applicationsUrl
+    label: Application email service address
+    type: string
+    description: The Google Apps Script web app address that ends in /exec (see SETUP.md, step 5). Leave empty to turn off automatic emails.

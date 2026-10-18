@@ -45,7 +45,7 @@ header.top nav a.lnk[aria-current="true"]{border-bottom-color:var(--moss)}
 .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;display:block}
 
 /* credentials */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--card);border:1px solid var(--rule);border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(var(--n,4),1fr);background:var(--card);border:1px solid var(--rule);border-radius:10px}
 .stats div{padding:18px 20px;border-left:1px solid var(--rule)}
 .stats div:first-child{border-left:0}
 .stats b{display:block;font-family:'Newsreader',serif;font-size:32px;font-weight:500;color:var(--moss);line-height:1.15}
@@ -125,7 +125,7 @@ button.ph{cursor:zoom-in}
 .raised{margin-top:24px}
 
 /* process */
-.stepper{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);border-radius:12px 12px 0 0;overflow:hidden;background:var(--card)}
+.stepper{display:grid;grid-template-columns:repeat(var(--n,4),1fr);border:1px solid var(--rule);border-radius:12px 12px 0 0;overflow:hidden;background:var(--card)}
 .stepper button{position:relative;background:none;border:0;border-right:1px solid var(--rule);padding:16px 18px;text-align:left;cursor:pointer;min-width:0;transition:background .2s}
 .stepper button:last-child{border-right:0}
 .stepper .n{display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rust)}
@@ -332,6 +332,7 @@ section .eyebrow{margin-bottom:8px}
   .mobile-progress{display:grid;gap:8px}
 }
 @media (max-width:600px){.dogs{grid-template-columns:1fr}.wiz fieldset,.wiz fieldset.on{grid-template-columns:1fr}.main{padding:20px 18px}.rev{padding:22px}.rev-text{font-size:19px}.sum-sec dl{grid-template-columns:1fr}.sum-sec dd{margin-bottom:6px}}
+.js.cms-loading [data-c],.js.cms-loading [data-list]{visibility:hidden}
 </style>
 </head>
 <body>
@@ -347,16 +348,16 @@ section .eyebrow{margin-bottom:8px}
 
   <div class="intro" id="top">
     <div>
-      <p class="eyebrow">Brave Heart · AKC member · Bonney Lake, Washington</p>
-      <h1>Home-raised Cavalier King Charles Spaniels</h1>
-      <p class="lead">I'm Laura. For 15 years I have bred Cavaliers with health first. Every breeding dog is health tested, and every puppy goes home vet-checked, vaccinated, and microchipped.</p>
-      <a class="btn" href="#puppies">See available puppies</a><a class="btn line" href="#apply">Apply for a puppy</a>
-      <div class="trust"><span class="av" aria-hidden="true">AB</span><p><q>Laura and Eugene are 10/10.</q><br>Anna B., verified owner on Good Dog</p></div>
+      <p class="eyebrow" data-c="home.eyebrow">Brave Heart · AKC member · Bonney Lake, Washington</p>
+      <h1 data-c="home.title">Home-raised Cavalier King Charles Spaniels</h1>
+      <p class="lead" data-c="home.intro">I'm Laura. For 15 years I have bred Cavaliers with health first. Every breeding dog is health tested, and every puppy goes home vet-checked, vaccinated, and microchipped.</p>
+      <a class="btn" href="#puppies" data-c="home.buttonPuppies">See available puppies</a><a class="btn line" href="#apply" data-c="home.buttonApply">Apply for a puppy</a>
+      <div class="trust" id="heroQuote"><span class="av" id="quoteAv" aria-hidden="true">AB</span><p><q data-c="home.quote">Laura and Eugene are 10/10.</q><br><span data-c="home.quoteAuthor">Anna B., verified owner on Good Dog</span></p></div>
     </div>
-    <button class="photo" type="button" id="heroPhoto" aria-label="View photo full size"><img src="images/photo.jpg" alt="Laura walking four Cavalier King Charles Spaniels across a mountain meadow"></button>
+    <button class="photo" type="button" id="heroPhoto" aria-label="View photo full size"><img id="heroImg" src="images/site/photo.jpg" alt="Laura walking four Cavalier King Charles Spaniels across a mountain meadow"></button>
   </div>
 
-  <div class="stats reveal" aria-label="At a glance">
+  <div class="stats reveal" id="stats" data-list aria-label="At a glance">
     <div><b data-count="15" data-suffix=" years">15 years</b><span>Breeding Cavaliers</span></div>
     <div><b data-count="100" data-suffix="+">100+</b><span>Puppies raised</span></div>
     <div><b>Excellent</b><span>Health testing rating on Good Dog</span></div>
@@ -366,28 +367,28 @@ section .eyebrow{margin-bottom:8px}
   <section id="puppies" aria-labelledby="pupTitle">
     <div class="sec-head reveal">
       <div>
-        <p class="eyebrow">Our puppies</p><h2 id="pupTitle">Available puppies</h2>
-        <p class="lede">Ages update automatically. Select Apply to start an application for a specific puppy.</p>
+        <p class="eyebrow" data-c="puppies-section.eyebrow">Our puppies</p><h2 id="pupTitle" data-c="puppies-section.title">Available puppies</h2>
+        <p class="lede" data-c="puppies-section.intro">Ages update automatically. Select Apply to start an application for a specific puppy.</p>
       </div>
       <span class="pill" id="availPill" hidden><i aria-hidden="true"></i><span id="availText"></span></span>
     </div>
     <div class="pups" id="grid"></div>
-    <div class="empty" id="empty" hidden>No puppies are available right now. Apply below and we will contact you when the next litter is ready.</div>
-    <div class="gone" id="gone" hidden><h3>Recently went home</h3><div class="gone-list" id="goneList"></div></div>
-    <p class="price-note reveal" id="priceNote">Each price includes a $1,000 non-refundable deposit, which reserves your puppy.</p>
+    <div class="empty" id="empty" hidden data-c="puppies-section.emptyText">No puppies are available right now. Apply below and we will contact you when the next litter is ready.</div>
+    <div class="gone" id="gone" hidden><h3 data-c="puppies-section.goneTitle">Recently went home</h3><div class="gone-list" id="goneList"></div></div>
+    <p class="price-note reveal" id="priceNote" data-c="puppies-section.priceNote">Each price includes a $1,000 non-refundable deposit, which reserves your puppy.</p>
   </section>
 
   <section id="about" aria-labelledby="aboutTitle">
     <div class="reveal">
-      <p class="eyebrow">About us</p><h2 id="aboutTitle">Meet the breeder</h2>
-      <p class="lede">Laura Tsekhmister, Brave Heart, Bonney Lake, Washington</p>
+      <p class="eyebrow" data-c="about.eyebrow">About us</p><h2 id="aboutTitle" data-c="about.title">Meet the breeder</h2>
+      <p class="lede" data-c="about.subtitle">Laura Tsekhmister, Brave Heart, Bonney Lake, Washington</p>
     </div>
     <div class="about reveal">
-      <div class="about-text">
+      <div class="about-text" id="aboutText" data-list>
         <p>I'm Laura Tsekhmister, the breeder behind Brave Heart. I brought more than a decade of European breeding experience to the US, and I keep learning through specialized seminars on canine reproduction, preservation breeding, and structure and conformation. Understanding the science behind a well-made dog is what led me to purposeful breeding.</p>
         <p>Our goal is simple: healthy, structurally sound, beautiful Cavaliers with sweet temperaments. Our breeding dogs live in our home, and Eugene and I stay in touch with every family long after their puppy goes home.</p>
       </div>
-      <dl class="factlist">
+      <dl class="factlist" id="facts" data-list>
         <div><dt>Location</dt><dd>Bonney Lake, WA</dd></div>
         <div><dt>Colors</dt><dd>Blenheim and tri-color</dd></div>
         <div><dt>Where our dogs live</dt><dd>In our home</dd></div>
@@ -399,11 +400,11 @@ section .eyebrow{margin-bottom:8px}
       <div class="show-head">
         <svg viewBox="0 0 48 60" aria-hidden="true"><path d="M15 33 9 57l8-5 4 7 5-23z" fill="#9a4b2a"/><path d="M33 33l6 24-8-5-4 7-5-23z" fill="#7d3a20"/><circle cx="24" cy="22" r="20" fill="#c9a13b"/><circle cx="24" cy="22" r="14.5" fill="#e3bf63"/><circle cx="24" cy="22" r="8" fill="#fff4d6"/></svg>
         <div>
-          <h3>Proven in the AKC show ring</h3>
-          <p>At American Kennel Club conformation shows, expert judges evaluate each dog against the official breed standard for structure, movement, and temperament. Our dogs compete and win there, so your puppy comes from parents that judges have confirmed are excellent examples of the breed. <a href="https://www.akc.org/sports/conformation/" target="_blank" rel="noopener">How AKC dog shows work ↗</a></p>
+          <h3 data-c="about.showTitle">Proven in the AKC show ring</h3>
+          <p><span data-c="about.showText">At American Kennel Club conformation shows, expert judges evaluate each dog against the official breed standard for structure, movement, and temperament. Our dogs compete and win there, so your puppy comes from parents that judges have confirmed are excellent examples of the breed.</span> <a href="https://www.akc.org/sports/conformation/" target="_blank" rel="noopener">How AKC dog shows work ↗</a></p>
         </div>
       </div>
-      <div class="dogs">
+      <div class="dogs" id="dogs" data-list>
         <div class="dog"><span class="role">Our stud · Imported from Hungary</span><h3>Snowflake Harmony of Life</h3><div class="wins"><span>Group 3rd, Best of Owner-Handler Toy Group</span><span>Multiple Winners Dog</span><span>Multiple Best of Winners</span></div><p>European bloodlines from a top Hungarian kennel. A compact, elegant male of about 13 lbs with a soft, affectionate nature.</p></div>
         <div class="dog"><span class="role">Born in our home</span><h3>Eleanor Queen of Hearts</h3><div class="wins"><span>Best in Show Puppy at her first AKC show</span><span>2 majors by 7 months old</span></div><p>A well-balanced, sweet, and friendly girl, and a proud example of what our program produces.</p></div>
       </div>
@@ -412,46 +413,45 @@ section .eyebrow{margin-bottom:8px}
 
   <section id="health" aria-labelledby="healthTitle">
     <div class="reveal">
-      <p class="eyebrow">Our standards</p><h2 id="healthTitle">Health first</h2>
-      <p class="lede">Our breeding dogs are health tested, and every puppy is checked and prepared before going home. Ask us for the results of your litter's parents.</p>
+      <p class="eyebrow" data-c="health.eyebrow">Our standards</p><h2 id="healthTitle" data-c="health.title">Health first</h2>
+      <p class="lede" data-c="health.intro">Our breeding dogs are health tested, and every puppy is checked and prepared before going home. Ask us for the results of your litter's parents.</p>
     </div>
     <div class="two reveal">
       <div class="panel">
-        <span class="rating">Good Dog health testing: Excellent</span>
-        <h3>Parent health testing</h3>
+        <span class="rating" data-c="health.badge">Good Dog health testing: Excellent</span>
+        <h3 data-c="health.parentTitle">Parent health testing</h3>
+        <div id="parentTests" data-list>
         <div class="acc"><button type="button" aria-expanded="false">Heart<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Cardiac evaluation, registered with OFA. Heart disease is the best-known health concern in Cavaliers, so this is a cornerstone of our program.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">Eyes<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Eye certification (CAER), registered with OFA, screening for inherited eye conditions.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">Knees, hips, and elbows<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Patellar luxation screening, plus hip and elbow evaluations.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">DNA testing<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Genetic tests for Episodic Falling Syndrome (EFS), Cavalier muscular dystrophy (CKCS-MD), and Dry Eye Curly Coat Syndrome.</div></div></div>
+        </div>
       </div>
       <div class="panel">
-        <h3>Every puppy goes home with</h3>
+        <h3 data-c="health.puppyTitle">Every puppy goes home with</h3>
+        <div id="puppyItems" data-list>
         <div class="acc"><button type="button" aria-expanded="false">Vet check and records<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Examined by a veterinarian before going home, with full vet records.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">Vaccinations and deworming<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>First round of vaccinations and deworming completed.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">Microchip and AKC registration<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Microchipped and eligible for AKC registration.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">Starter kit<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>Food, treats, and toys, plus a blanket carrying the scent of mom and littermates to help with the first nights at home.</div></div></div>
         <div class="acc"><button type="button" aria-expanded="false">Sales contract<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>A written contract that requires spaying or neutering and includes a Return to Breeder clause, so a Brave Heart dog never ends up in a shelter.</div></div></div>
+        </div>
       </div>
     </div>
     <div class="panel raised reveal">
-      <h3>Raised to be confident</h3>
-      <p class="lede" style="margin:0">Puppies are handled every day and introduced to the experiences they will meet in a family home.</p>
-      <div class="chips"><span>Daily handling</span><span>Household sounds</span><span>Car rides</span><span>New places</span><span>Scent introduction</span><span>Other dogs</span></div>
+      <h3 data-c="health.raisedTitle">Raised to be confident</h3>
+      <p class="lede" style="margin:0" data-c="health.raisedText">Puppies are handled every day and introduced to the experiences they will meet in a family home.</p>
+      <div class="chips" id="raisedChips" data-list><span>Daily handling</span><span>Household sounds</span><span>Car rides</span><span>New places</span><span>Scent introduction</span><span>Other dogs</span></div>
     </div>
   </section>
 
   <section id="process" aria-labelledby="procTitle">
     <div class="reveal">
-      <p class="eyebrow">The process</p><h2 id="procTitle">How it works</h2>
-      <p class="lede">Four steps from application to bringing your puppy home.</p>
+      <p class="eyebrow" data-c="process.eyebrow">The process</p><h2 id="procTitle" data-c="process.title">How it works</h2>
+      <p class="lede" data-c="process.intro">Four steps from application to bringing your puppy home.</p>
     </div>
     <div class="reveal">
-      <div class="stepper" role="tablist" aria-label="Steps">
-        <button type="button" role="tab" aria-selected="true" data-step="0"><span class="n">Step 1</span><span class="t">Apply</span></button>
-        <button type="button" role="tab" aria-selected="false" data-step="1"><span class="n">Step 2</span><span class="t">Talk</span></button>
-        <button type="button" role="tab" aria-selected="false" data-step="2"><span class="n">Step 3</span><span class="t">Reserve</span></button>
-        <button type="button" role="tab" aria-selected="false" data-step="3"><span class="n">Step 4</span><span class="t">Go home</span></button>
-      </div>
+      <div class="stepper" id="stepper" role="tablist" aria-label="Steps" data-list></div>
       <div class="step-panel" role="tabpanel" aria-live="polite">
         <p id="stepText"></p>
         <button class="btn" type="button" id="stepNext">Next step</button>
@@ -461,8 +461,8 @@ section .eyebrow{margin-bottom:8px}
 
   <section id="reviews" class="band" aria-labelledby="revTitle">
     <div class="reveal">
-      <p class="eyebrow">Owner stories</p><h2 id="revTitle">What families say</h2>
-      <div class="rev-top"><span class="pill"><i aria-hidden="true"></i>100% recommend</span><span class="pill" id="revTotal"></span></div>
+      <p class="eyebrow" data-c="reviews-section.eyebrow">Owner stories</p><h2 id="revTitle" data-c="reviews-section.title">What families say</h2>
+      <div class="rev-top"><span class="pill"><i aria-hidden="true"></i><span data-c="reviews-section.badge">100% recommend</span></span><span class="pill" id="revTotal"></span></div>
     </div>
     <div class="rev reveal" id="revBox" aria-roledescription="carousel" aria-label="Owner reviews">
       <p class="rev-text" id="revText" aria-live="polite"></p>
@@ -474,15 +474,15 @@ section .eyebrow{margin-bottom:8px}
         <span class="count" id="revCount"></span>
       </div>
     </div>
-    <p class="rev-src reveal">Verified owner stories from our <a href="https://www.gooddog.com/breeders/brave-heart-washington" target="_blank" rel="noopener">Good Dog profile</a>.</p>
+    <p class="rev-src reveal"><a href="https://www.gooddog.com/breeders/brave-heart-washington" target="_blank" rel="noopener" data-c="reviews-section.sourceText">Verified owner stories from our Good Dog profile ↗</a></p>
   </section>
 
   <section id="contact" aria-labelledby="contactTitle">
     <div class="reveal">
-      <p class="eyebrow">Get in touch</p><h2 id="contactTitle">Contact</h2>
-      <p class="lede">For questions about a puppy or your application. Pick-up is in Bonney Lake, at Seattle–Tacoma Airport, or in SeaTac, and drop-off can be arranged.</p>
+      <p class="eyebrow" data-c="contact.eyebrow">Get in touch</p><h2 id="contactTitle" data-c="contact.title">Contact</h2>
+      <p class="lede" data-c="contact.intro">For questions about a puppy or your application. Pick-up is in Bonney Lake, at Seattle–Tacoma Airport, or in SeaTac, and drop-off can be arranged.</p>
     </div>
-    <div class="contact reveal">
+    <div class="contact reveal" id="contactCards" data-list>
       <div class="ccard"><span class="who">Eugene</span><span class="num">206-255-2007</span><span class="how">Calls and text messages</span><button class="copy" type="button" data-copy="206-255-2007">Copy number</button></div>
       <div class="ccard"><span class="who">Laura</span><span class="num">360-702-2367</span><span class="how">Text messages only</span><button class="copy" type="button" data-copy="360-702-2367">Copy number</button></div>
       <div class="ccard"><span class="who">Email</span><span class="num">braveheartcavaliers@gmail.com</span><span class="how">Applications and questions</span><button class="copy" type="button" data-copy="braveheartcavaliers@gmail.com">Copy email</button></div>
@@ -491,8 +491,8 @@ section .eyebrow{margin-bottom:8px}
 
   <section id="apply" aria-labelledby="applyTitle">
     <div class="reveal">
-      <p class="eyebrow">Apply</p><h2 id="applyTitle">Cavalier King Charles Spaniel Puppy Application</h2>
-      <p class="lede">Thank you for your interest in our puppies. The application takes about ten minutes, and your answers are saved on this device as you go.</p>
+      <p class="eyebrow" data-c="application.eyebrow">Apply</p><h2 id="applyTitle" data-c="application.title">Cavalier King Charles Spaniel Puppy Application</h2>
+      <p class="lede" data-c="application.intro">Thank you for your interest in our puppies. The application takes about ten minutes, and your answers are saved on this device as you go.</p>
     </div>
 
     <div class="appbox reveal" id="appBox">
@@ -500,7 +500,7 @@ section .eyebrow{margin-bottom:8px}
         <h3>Your application</h3>
         <ol id="sideNav"></ol>
         <p class="time" id="timeLeft"></p>
-        <p class="disclaimer">Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.</p>
+        <p class="disclaimer" data-c="application.disclaimer">Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.</p>
       </aside>
 
       <div class="main" id="appMain">
@@ -680,8 +680,8 @@ section .eyebrow{margin-bottom:8px}
 
       <div class="thanks" id="thanks" hidden tabindex="-1">
         <svg class="check" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M19 33l9 9 17-19"/></svg>
-        <h3>Thank you for your interest in our Cavalier King Charles Spaniel puppies!</h3>
-        <p>Please note: Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.</p>
+        <h3 data-c="application.thankYouTitle">Thank you for your interest in our Cavalier King Charles Spaniel puppies!</h3>
+        <p data-c="application.thankYouText">Please note: Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.</p>
         <p class="sent-note" id="sentNote" hidden></p>
         <div class="send" id="sendBox">
           <strong id="sendTitle">One last step: send it to us</strong>
@@ -700,19 +700,21 @@ section .eyebrow{margin-bottom:8px}
   <footer class="foot">
     <div>
       <span class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>Brave Heart</span>
-      <p style="margin-top:10px;max-width:34ch">Home-raised Cavalier King Charles Spaniels in Bonney Lake, Washington, bred with health first.</p>
+      <p style="margin-top:10px;max-width:34ch" data-c="footer.tagline">Home-raised Cavalier King Charles Spaniels in Bonney Lake, Washington, bred with health first.</p>
     </div>
     <div>
       <h4>Contact</h4>
+      <div id="footContacts" data-list>
       <p>Eugene · 206-255-2007<br>Calls and texts</p>
       <p>Laura · 360-702-2367<br>Texts only</p>
       <p>braveheartcavaliers@gmail.com</p>
+      </div>
     </div>
     <div>
       <h4>Explore</h4>
       <a href="#puppies">Available puppies</a><a href="#about">Meet the breeder</a><a href="#health">Health</a><a href="#reviews">Reviews</a><a href="#apply">Apply for a puppy</a>
     </div>
-    <p class="copy-line">© 2026 Brave Heart · AKC member · <a href="https://www.gooddog.com/breeders/brave-heart-washington" target="_blank" rel="noopener">Good Dog certified breeder</a></p>
+    <p class="copy-line"><span data-c="footer.bottomLine">© 2026 Brave Heart · AKC member</span> · <a href="https://www.gooddog.com/breeders/brave-heart-washington" target="_blank" rel="noopener">Good Dog certified breeder</a></p>
   </footer>
 </div>
 
@@ -735,7 +737,60 @@ section .eyebrow{margin-bottom:8px}
 <script>
 /* Puppies, reviews and settings are loaded from data/*.json.
    Laura edits those files in Pages CMS, so nothing here needs changing. */
-let PUPPIES = [], REVIEWS = [], SETTINGS = {};
+let PUPPIES = [], REVIEWS = [], SETTINGS = {}, CONTENT = {};
+document.documentElement.classList.add('cms-loading');
+setTimeout(() => document.documentElement.classList.remove('cms-loading'), 2500); // never hide text for long
+const CONTENT_FILES = ['home', 'puppies-section', 'about', 'health', 'process', 'reviews-section', 'contact', 'application', 'footer'];
+const contentValue = path => path.split('.').reduce((o, k) => (o && typeof o === 'object') ? o[k] : undefined, CONTENT);
+const txt = (path, fallback) => { const v = contentValue(path); return (typeof v === 'string' && v.trim()) ? v.trim() : fallback; };
+const list = path => { const v = contentValue(path); return Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '') : null; };
+function contactEmail(){
+  const cards = list('contact.cards') || [];
+  const c = cards.find(c => /@/.test(String(c.value || '')));
+  return c ? String(c.value).trim() : 'braveheartcavaliers@gmail.com';
+}
+function initials(name){ return String(name || '').replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase(); }
+function accHTML(items){ return items.filter(i => i && i.title).map(i => `<div class="acc"><button type="button" aria-expanded="false">${esc(i.title)}<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>${esc(i.text || '')}</div></div></div>`).join(''); }
+function applyContent(){
+  document.querySelectorAll('[data-c]').forEach(el => { const v = txt(el.dataset.c, null); if (v !== null) el.textContent = v; });
+  const photo = txt('home.photo', null);
+  if (photo) $('heroImg').src = String(photo).replace(/^\/+/, '');
+  const alt = txt('home.photoAlt', null); if (alt) $('heroImg').alt = alt;
+  $('heroQuote').hidden = !txt('home.quote', 'x');
+  $('quoteAv').textContent = initials(txt('home.quoteAuthor', 'Anna B.'));
+  const stats = list('home.stats');
+  if (stats) {
+    $('stats').style.setProperty('--n', Math.min(stats.length, 4) || 1);
+    $('stats').innerHTML = stats.map(s => {
+      const v = String(s.value || ''); const m = v.match(/^(\d+)(.*)$/);
+      return `<div><b${m ? ` data-count="${m[1]}" data-suffix="${esc(m[2])}"` : ''}>${esc(v)}</b><span>${esc(s.label || '')}</span></div>`;
+    }).join('');
+    $('stats').hidden = stats.length === 0;
+  }
+  const about = txt('about.text', null);
+  if (about) $('aboutText').innerHTML = about.split(/\n\s*\n/).map(p => `<p>${esc(p.trim())}</p>`).join('');
+  const facts = list('about.facts');
+  if (facts) { $('facts').innerHTML = facts.map(f => `<div><dt>${esc(f.label || '')}</dt><dd>${esc(f.value || '')}</dd></div>`).join(''); $('facts').hidden = !facts.length; }
+  const dogs = list('about.dogs');
+  if (dogs) {
+    $('dogs').innerHTML = dogs.map(d => `<div class="dog">${d.role ? `<span class="role">${esc(d.role)}</span>` : ''}<h3>${esc(d.name || '')}</h3>${(d.wins || []).filter(Boolean).length ? `<div class="wins">${d.wins.filter(Boolean).map(w => `<span>${esc(w)}</span>`).join('')}</div>` : ''}<p>${esc(d.text || '')}</p></div>`).join('');
+  }
+  $('show').hidden = !txt('about.showTitle', 'x') && !(dogs && dogs.length);
+  const parent = list('health.parentTests'); if (parent) $('parentTests').innerHTML = accHTML(parent);
+  const pupItems = list('health.puppyItems'); if (pupItems) $('puppyItems').innerHTML = accHTML(pupItems);
+  const chips = list('health.raisedChips');
+  if (chips) $('raisedChips').innerHTML = chips.map(c => `<span>${esc(c)}</span>`).join('');
+  const steps = list('process.steps');
+  if (steps && steps.length) { STEPS = steps.filter(s => s && s.title).map(s => ({ title: String(s.title), text: String(s.text || '') })); renderStepper(); showStep(0); }
+  const cards = list('contact.cards');
+  if (cards) {
+    $('contactCards').innerHTML = cards.filter(c => c && c.value).map(c => `<div class="ccard"><span class="who">${esc(c.who || '')}</span><span class="num">${esc(c.value)}</span><span class="how">${esc(c.how || '')}</span><button class="copy" type="button" data-copy="${esc(c.value)}">${/@/.test(c.value) ? 'Copy email' : 'Copy number'}</button></div>`).join('');
+    $('footContacts').innerHTML = cards.filter(c => c && c.value).map(c => `<p>${c.who && !/@/.test(c.value) ? esc(c.who) + ' · ' : ''}${esc(c.value)}${c.how && !/@/.test(c.value) ? '<br>' + esc(c.how) : ''}</p>`).join('');
+  }
+  observeCounts();
+}
+
+
 const startedAt = Date.now();
 
 /* ---------- helpers ---------- */
@@ -761,7 +816,7 @@ let lbItems = [], lbIdx = 0;
 function openLb(items, i){ lbItems = items; lbIdx = i; renderLb(); $('lb').showModal(); }
 function renderLb(){ const it = lbItems[lbIdx]; $('lbImg').src = it.url; $('lbImg').alt = it.caption; $('lbCap').textContent = it.caption + (lbItems.length > 1 ? `  ·  ${lbIdx + 1} of ${lbItems.length}` : ''); $('lbPrev').hidden = $('lbNext').hidden = lbItems.length < 2; }
 function lbStep(d){ if (lbItems.length < 2) return; lbIdx = (lbIdx + d + lbItems.length) % lbItems.length; renderLb(); }
-$('heroPhoto').addEventListener('click', () => openLb([{ url: 'images/photo.jpg', caption: 'Laura with her Cavaliers' }], 0));
+$('heroPhoto').addEventListener('click', () => openLb([{ url: $('heroImg').getAttribute('src'), caption: $('heroImg').alt }], 0));
 $('lbPrev').onclick = () => lbStep(-1); $('lbNext').onclick = () => lbStep(1); $('lbClose').onclick = () => $('lb').close();
 $('lb').addEventListener('keydown', e => { if (e.key === 'ArrowLeft') lbStep(-1); if (e.key === 'ArrowRight') lbStep(1); });
 $('lb').addEventListener('click', e => { if (e.target === $('lb')) $('lb').close(); });
@@ -815,27 +870,34 @@ $('grid').addEventListener('click', e => {
 });
 
 /* ---------- accordions ---------- */
-document.querySelectorAll('.acc button').forEach(b => b.addEventListener('click', () => {
+document.addEventListener('click', e => {
+  const b = e.target.closest('.acc > button'); if (!b) return;
   const acc = b.closest('.acc'); const open = !acc.classList.contains('open');
   acc.classList.toggle('open', open); b.setAttribute('aria-expanded', String(open));
-}));
+});
 
 /* ---------- process ---------- */
-const STEPS = [
-  'Complete the puppy application below. It helps us understand your home and what you are looking for in a puppy.',
-  'We get in touch to talk through your application, answer your questions, and make sure a Cavalier is the right fit for your family.',
-  'Once we agree it is a good match, a $1,000 non-refundable deposit reserves your puppy. It counts toward the price. You also sign our sales contract.',
-  'Pick up your puppy in Bonney Lake, meet us at Seattle–Tacoma Airport or in SeaTac, or arrange a drop-off. Your puppy goes home with a starter kit and vet records.'
+let STEPS = [
+  { title: 'Apply', text: 'Complete the puppy application below. It helps us understand your home and what you are looking for in a puppy.' },
+  { title: 'Talk', text: 'We get in touch to talk through your application, answer your questions, and make sure a Cavalier is the right fit for your family.' },
+  { title: 'Reserve', text: 'Once we agree it is a good match, a $1,000 non-refundable deposit reserves your puppy. It counts toward the price. You also sign our sales contract.' },
+  { title: 'Go home', text: 'Pick up your puppy in Bonney Lake, meet us at Seattle–Tacoma Airport or in SeaTac, or arrange a drop-off. Your puppy goes home with a starter kit and vet records.' }
 ];
+function renderStepper(){
+  const el = $('stepper');
+  el.style.setProperty('--n', Math.min(STEPS.length, 4));
+  el.innerHTML = STEPS.map((s, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-step="${i}"><span class="n">Step ${i + 1}</span><span class="t">${esc(s.title)}</span></button>`).join('');
+}
 let stepIdx = 0;
 function showStep(i){
   stepIdx = (i + STEPS.length) % STEPS.length;
   document.querySelectorAll('.stepper button').forEach((b, k) => b.setAttribute('aria-selected', String(k === stepIdx)));
-  $('stepText').textContent = STEPS[stepIdx];
+  $('stepText').textContent = STEPS[stepIdx].text;
   $('stepNext').textContent = stepIdx === STEPS.length - 1 ? 'Apply now' : 'Next step';
 }
-document.querySelectorAll('.stepper button').forEach(b => b.addEventListener('click', () => showStep(+b.dataset.step)));
+$('stepper').addEventListener('click', e => { const b = e.target.closest('[data-step]'); if (b) showStep(+b.dataset.step); });
 $('stepNext').addEventListener('click', () => { if (stepIdx === STEPS.length - 1) $('apply').scrollIntoView(); else showStep(stepIdx + 1); });
+renderStepper();
 showStep(0);
 
 /* ---------- reviews carousel ---------- */
@@ -864,7 +926,7 @@ $('revBox').addEventListener('touchstart', e => { touchX = e.touches[0].clientX;
 $('revBox').addEventListener('touchend', e => { if (touchX === null) return; const dx = e.changedTouches[0].clientX - touchX; if (Math.abs(dx) > 40) { revGo(revIdx + (dx < 0 ? 1 : -1)); revAuto(); } touchX = null; });
 
 /* ---------- contact ---------- */
-document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyText(b.dataset.copy, 'Copied')));
+document.addEventListener('click', e => { const b = e.target.closest('[data-copy]'); if (b) copyText(b.dataset.copy, 'Copied'); });
 
 /* ---------- application ---------- */
 const form = $('appForm');
@@ -1087,9 +1149,9 @@ form.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagNam
 let sending = false;
 function showThanks(sent, email){
   $('sentNote').hidden = !sent;
-  if (sent) $('sentNote').textContent = `We have received your application and emailed a confirmation to ${email}. Laura will be in touch soon. If you don't see the email, please check your spam folder.`;
+  if (sent) $('sentNote').textContent = txt('application.sentMessage', "We have received your application and emailed a confirmation to {email}. Laura will be in touch soon. If you don't see the email, please check your spam folder.").replace(/\{email\}/g, email);
   $('sendTitle').textContent = sent ? 'Keep a copy for your records' : 'One last step: send it to us';
-  $('sendText').textContent = sent ? 'Optional. You can copy your answers below.' : 'We could not send your application automatically. Please copy it and email it to braveheartcavaliers@gmail.com, or text it to Laura at 360-702-2367.';
+  $('sendText').textContent = sent ? 'Optional. You can copy your answers below.' : txt('application.fallbackMessage', 'We could not send your application automatically. Please copy it and email it to braveheartcavaliers@gmail.com, or text it to Laura at 360-702-2367.');
   $('mailApp').hidden = sent;
   $('appMain').hidden = true; $('appBox').querySelector('.side').hidden = true;
   $('thanks').hidden = false; $('thanks').focus(); scrollToForm();
@@ -1101,7 +1163,7 @@ form.addEventListener('submit', async e => {
   if (form.querySelector('[name="company"]').value) return;
   const answers = visibleVals(); delete answers.company;
   $('appText').value = applicationText();
-  $('mailApp').href = 'mailto:braveheartcavaliers@gmail.com?subject=' + encodeURIComponent('Puppy application from ' + (answers.fullName || ''));
+  $('mailApp').href = 'mailto:' + contactEmail() + '?subject=' + encodeURIComponent('Puppy application from ' + (answers.fullName || ''));
   const url = String(SETTINGS.applicationsUrl || '').trim();
   let sent = false;
   if (/^https:\/\/script\.google\.com\//.test(url)) {
@@ -1142,7 +1204,8 @@ const countObs = new IntersectionObserver(es => es.forEach(en => {
   const tick = now => { const t = Math.min(1, (now - t0) / 1200); el.textContent = Math.round(to * (1 - Math.pow(1 - t, 3))) + suf; if (t < 1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
 }), { threshold: .6 });
-document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+function observeCounts(){ document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el)); }
+observeCounts();
 
 function observeReveals(){
   const ro = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); ro.unobserve(en.target); } }), { threshold: .1 });
@@ -1172,6 +1235,10 @@ async function getJSON(path, fallback){
   catch (e) { return fallback; }
 }
 (async () => {
+  const contentParts = await Promise.all(CONTENT_FILES.map(n => getJSON(`data/content/${n}.json`, null)));
+  CONTENT_FILES.forEach((n, i) => { if (contentParts[i] && typeof contentParts[i] === 'object') CONTENT[n] = contentParts[i]; });
+  try { applyContent(); } catch (err) { console.error(err); }
+  document.documentElement.classList.remove('cms-loading');
   [PUPPIES, REVIEWS, SETTINGS] = await Promise.all([getJSON('data/puppies.json', []), getJSON('data/reviews.json', []), getJSON('data/settings.json', {})]);
   if (!Array.isArray(PUPPIES)) PUPPIES = [];
   REVIEWS = Array.isArray(REVIEWS) ? REVIEWS.filter(r => r && r.text) : [];

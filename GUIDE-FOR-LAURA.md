@@ -36,6 +36,22 @@ To remove a puppy completely, delete it from the list instead.
 
 Open **Reviews**, tap **Add**, and fill in the name as it should appear (for example "Anna B."), the month and year, and the review text. Only add reviews the family is happy for you to share.
 
+## Change any text or the main photo
+
+Open **Website text** in the menu. Each item is one section of the website, in the order they appear on the page:
+
+1. Top of page (heading, introduction, main photo, highlights bar)
+2. Available puppies (the section's heading and notes)
+3. Meet the breeder (about text, quick facts, show dogs and their wins)
+4. Health (tests, what every puppy goes home with)
+5. How it works (the steps)
+6. Reviews (the section's heading)
+7. Contact (phone numbers and email)
+8. Application (thank-you and other messages)
+9. Footer
+
+Change the text, tap **Save**, and the website updates in 1 to 2 minutes. To start a new paragraph in a longer text, leave an empty line. The application's questions themselves are fixed; ask Sviatlana if you want to change them.
+
 ## Where applications go
 
 When someone applies:
