@@ -1,0 +1,108 @@
+# Pages CMS setup for the Brave Heart website.
+# This file tells Pages CMS which parts of the site Laura can edit.
+
+media:
+  - name: puppies
+    label: Puppy photos
+    input: images/puppies
+    output: /images/puppies
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: puppies
+    label: Puppies
+    type: file
+    path: data/puppies.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: available
+        description: Choose "Went home" instead of deleting, so the puppy shows in the "Recently went home" row.
+        options:
+          values:
+            - name: available
+              label: Available
+            - name: reserved
+              label: Reserved
+            - name: went-home
+              label: Went home
+      - name: born
+        label: Birth date
+        type: date
+        required: true
+        description: The age on the website updates by itself.
+        options:
+          format: yyyy-MM-dd
+      - name: price
+        label: Price in USD
+        type: number
+        description: The full price, including the $1,000 deposit. Leave empty to show "Price on request".
+      - name: sex
+        label: Sex
+        type: select
+        options:
+          values:
+            - name: Female
+              label: Female
+            - name: Male
+              label: Male
+      - name: color
+        label: Color
+        type: select
+        options:
+          values:
+            - name: Blenheim
+              label: Blenheim
+            - name: Tri-color
+              label: Tri-color
+      - name: photos
+        label: Photos
+        type: image
+        description: Up to 6 photos. The first one is shown on the card.
+        options:
+          media: puppies
+          multiple:
+            max: 6
+      - name: note
+        label: Short note (optional)
+        type: string
+        description: One line for buyers, for example "Loves cuddles, great with kids".
+
+  - name: reviews
+    label: Reviews
+    type: file
+    path: data/reviews.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: Name as shown (for example "Anna B.")
+        type: string
+        required: true
+      - name: date
+        label: Month and year (for example "May 2026")
+        type: string
+      - name: text
+        label: Review
+        type: text
+        required: true
+
+  - name: settings
+    label: Website settings
+    type: file
+    path: data/settings.json
+    format: json
+    fields:
+      - name: applicationsUrl
+        label: Application email service address
+        type: string
+        description: The Google Apps Script web app address that ends in /exec (see SETUP.md, step 5). Leave empty to turn off automatic emails.
