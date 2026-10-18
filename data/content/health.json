@@ -1,0 +1,58 @@
+{
+  "eyebrow": "Our standards",
+  "title": "Health first",
+  "intro": "Our breeding dogs are health tested, and every puppy is checked and prepared before going home. Ask us for the results of your litter's parents.",
+  "badge": "Good Dog health testing: Excellent",
+  "parentTitle": "Parent health testing",
+  "parentTests": [
+    {
+      "title": "Heart",
+      "text": "Cardiac evaluation, registered with OFA. Heart disease is the best-known health concern in Cavaliers, so this is a cornerstone of our program."
+    },
+    {
+      "title": "Eyes",
+      "text": "Eye certification (CAER), registered with OFA, screening for inherited eye conditions."
+    },
+    {
+      "title": "Knees, hips, and elbows",
+      "text": "Patellar luxation screening, plus hip and elbow evaluations."
+    },
+    {
+      "title": "DNA testing",
+      "text": "Genetic tests for Episodic Falling Syndrome (EFS), Cavalier muscular dystrophy (CKCS-MD), and Dry Eye Curly Coat Syndrome."
+    }
+  ],
+  "puppyTitle": "Every puppy goes home with",
+  "puppyItems": [
+    {
+      "title": "Vet check and records",
+      "text": "Examined by a veterinarian before going home, with full vet records."
+    },
+    {
+      "title": "Vaccinations and deworming",
+      "text": "First round of vaccinations and deworming completed."
+    },
+    {
+      "title": "Microchip and AKC registration",
+      "text": "Microchipped and eligible for AKC registration."
+    },
+    {
+      "title": "Starter kit",
+      "text": "Food, treats, and toys, plus a blanket carrying the scent of mom and littermates to help with the first nights at home."
+    },
+    {
+      "title": "Sales contract",
+      "text": "A written contract that requires spaying or neutering and includes a Return to Breeder clause, so a Brave Heart dog never ends up in a shelter."
+    }
+  ],
+  "raisedTitle": "Raised to be confident",
+  "raisedText": "Puppies are handled every day and introduced to the experiences they will meet in a family home.",
+  "raisedChips": [
+    "Daily handling",
+    "Household sounds",
+    "Car rides",
+    "New places",
+    "Scent introduction",
+    "Other dogs"
+  ]
+}

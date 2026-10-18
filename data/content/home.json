@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Brave Heart · AKC member · Bonney Lake, Washington",
+  "title": "Home-raised Cavalier King Charles Spaniels",
+  "intro": "I'm Laura. For 15 years I have bred Cavaliers with health first. Every breeding dog is health tested, and every puppy goes home vet-checked, vaccinated, and microchipped.",
+  "buttonPuppies": "See available puppies",
+  "buttonApply": "Apply for a puppy",
+  "photo": "/images/site/photo.jpg",
+  "photoAlt": "Laura walking four Cavalier King Charles Spaniels across a mountain meadow",
+  "quote": "Laura and Eugene are 10/10.",
+  "quoteAuthor": "Anna B., verified owner on Good Dog",
+  "stats": [
+    {
+      "value": "15 years",
+      "label": "Breeding Cavaliers"
+    },
+    {
+      "value": "100+",
+      "label": "Puppies raised"
+    },
+    {
+      "value": "Excellent",
+      "label": "Health testing rating on Good Dog"
+    },
+    {
+      "value": "100%",
+      "label": "Of owners recommend us"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "eyebrow": "The process",
+  "title": "How it works",
+  "intro": "Four steps from application to bringing your puppy home.",
+  "steps": [
+    {
+      "title": "Apply",
+      "text": "Complete the puppy application below. It helps us understand your home and what you are looking for in a puppy."
+    },
+    {
+      "title": "Talk",
+      "text": "We get in touch to talk through your application, answer your questions, and make sure a Cavalier is the right fit for your family."
+    },
+    {
+      "title": "Reserve",
+      "text": "Once we agree it is a good match, a $1,000 non-refundable deposit reserves your puppy. It counts toward the price. You also sign our sales contract."
+    },
+    {
+      "title": "Go home",
+      "text": "Pick up your puppy in Bonney Lake, meet us at Seattle–Tacoma Airport or in SeaTac, or arrange a drop-off. Your puppy goes home with a starter kit and vet records."
+    }
+  ]
+}

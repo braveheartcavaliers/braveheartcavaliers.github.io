@@ -1,0 +1,51 @@
+{
+  "eyebrow": "About us",
+  "title": "Meet the breeder",
+  "subtitle": "Laura Tsekhmister, Brave Heart, Bonney Lake, Washington",
+  "text": "I'm Laura Tsekhmister, the breeder behind Brave Heart. I brought more than a decade of European breeding experience to the US, and I keep learning through specialized seminars on canine reproduction, preservation breeding, and structure and conformation. Understanding the science behind a well-made dog is what led me to purposeful breeding.\n\nOur goal is simple: healthy, structurally sound, beautiful Cavaliers with sweet temperaments. Our breeding dogs live in our home, and Eugene and I stay in touch with every family long after their puppy goes home.",
+  "facts": [
+    {
+      "label": "Location",
+      "value": "Bonney Lake, WA"
+    },
+    {
+      "label": "Colors",
+      "value": "Blenheim and tri-color"
+    },
+    {
+      "label": "Where our dogs live",
+      "value": "In our home"
+    },
+    {
+      "label": "Club membership",
+      "value": "AKC"
+    },
+    {
+      "label": "Good Dog",
+      "value": "Certified breeder since 2023"
+    }
+  ],
+  "showTitle": "Proven in the AKC show ring",
+  "showText": "At American Kennel Club conformation shows, expert judges evaluate each dog against the official breed standard for structure, movement, and temperament. Our dogs compete and win there, so your puppy comes from parents that judges have confirmed are excellent examples of the breed.",
+  "dogs": [
+    {
+      "role": "Our stud · Imported from Hungary",
+      "name": "Snowflake Harmony of Life",
+      "wins": [
+        "Group 3rd, Best of Owner-Handler Toy Group",
+        "Multiple Winners Dog",
+        "Multiple Best of Winners"
+      ],
+      "text": "European bloodlines from a top Hungarian kennel. A compact, elegant male of about 13 lbs with a soft, affectionate nature."
+    },
+    {
+      "role": "Born in our home",
+      "name": "Eleanor Queen of Hearts",
+      "wins": [
+        "Best in Show Puppy at her first AKC show",
+        "2 majors by 7 months old"
+      ],
+      "text": "A well-balanced, sweet, and friendly girl, and a proud example of what our program produces."
+    }
+  ]
+}

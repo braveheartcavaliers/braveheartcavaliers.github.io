@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Get in touch",
+  "title": "Contact",
+  "intro": "For questions about a puppy or your application. Pick-up is in Bonney Lake, at Seattle–Tacoma Airport, or in SeaTac, and drop-off can be arranged.",
+  "cards": [
+    {
+      "who": "Eugene",
+      "value": "206-255-2007",
+      "how": "Calls and text messages"
+    },
+    {
+      "who": "Laura",
+      "value": "360-702-2367",
+      "how": "Text messages only"
+    },
+    {
+      "who": "Email",
+      "value": "braveheartcavaliers@gmail.com",
+      "how": "Applications and questions"
+    }
+  ]
+}
