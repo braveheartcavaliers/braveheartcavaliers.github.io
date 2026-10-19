@@ -8,5 +8,6 @@
   "sentMessage": "Thank you! We have received your application and will get back to you within 48 hours. A confirmation has been sent to {email}. If you don't see it, please check your spam folder.",
   "fallbackMessage": "We could not send your application automatically. Please copy it and email it to braveheartcavaliers@gmail.com, or text it to Laura at 360-702-2367.",
   "confirmationSubject": "We received your puppy application",
-  "confirmationText": "Thank you for your interest in our Cavalier King Charles Spaniel puppies! We have received your application and will get back to you within 48 hours."
+  "confirmationText": "Thank you for your interest in our Cavalier King Charles Spaniel puppies! We have received your application and will get back to you within 48 hours.",
+  "privacyNote": "Your information is kept private. We use it only to review your application and to get back to you about a puppy. We never sell or share it, and we will never use it for advertising, marketing, or any other purpose."
 }
