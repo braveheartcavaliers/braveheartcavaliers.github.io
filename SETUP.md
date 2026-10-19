@@ -47,18 +47,18 @@ From now on the site republishes by itself every time something changes, includi
 
 ## Step 5. Turn on application emails (Google)
 
-### 5a. Create the sheet and paste the script
-1. Signed in to Google as **braveheartcavaliers@gmail.com**, open sheets.new to create a new Google Sheet.
-2. Name it **Brave Heart Applications**.
-3. Click **Extensions → Apps Script**.
-4. Delete the sample code, then paste in the entire contents of `apps-script/Code.gs`.
-5. Click the project name at the top and rename it **Brave Heart applications**. Click **Save** (the disk icon).
+### 5a. Create the script
+1. Signed in to Google as **braveheartcavaliers@gmail.com**, open script.new to create a new Apps Script project.
+2. Delete the sample code, then paste in the entire contents of `apps-script/Code.gs`.
+3. Click the project name at the top and rename it **Brave Heart applications**. Click **Save** (the disk icon).
+
+The script creates the **Brave Heart Applications** Google Sheet in the same Google Drive the first time it runs.
 
 ### 5b. Send yourself a test (this also grants permissions)
 1. In the function dropdown at the top, choose **sendTestEmails** and click **Run**.
 2. Google asks for permission. Click **Review permissions** and choose the Brave Heart account.
 3. You will see "Google hasn't verified this app". This is normal for a private script you wrote yourself. Click **Advanced → Go to Brave Heart applications (unsafe) → Allow**.
-4. Check the Brave Heart inbox for **two emails**: the breeder notification and the applicant confirmation. The sheet now has an **Applications** tab with one test row. You can delete the test row.
+4. Check the Brave Heart inbox for **two emails**: the breeder notification and the applicant confirmation. A **Brave Heart Applications** sheet now exists in Google Drive with one test row. You can delete the test row.
 
 ### 5c. Publish the script as a web app
 1. Click **Deploy → New deployment**.

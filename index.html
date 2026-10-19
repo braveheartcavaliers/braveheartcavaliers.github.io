@@ -76,7 +76,13 @@ button.ph{cursor:zoom-in}
 .pup .apply{margin-top:14px;padding:11px;border:1px solid var(--moss);background:transparent;color:var(--moss);font:600 14px 'Figtree',sans-serif;border-radius:6px;cursor:pointer;transition:background .2s,color .2s}
 .pup .apply:hover{background:var(--moss);color:#fff}
 .pup .apply:disabled{border-color:var(--rule);color:#9a9c95;background:transparent;cursor:not-allowed}
-.empty{padding:34px 20px;text-align:center;color:var(--mute);background:var(--card);border:1px dashed #cfcabd;border-radius:12px}
+.empty{padding:0;color:var(--mute);background:var(--card);border:1px solid var(--rule);border-radius:14px;display:grid;grid-template-columns:220px 1fr;align-items:center;overflow:hidden}
+.empty img{width:100%;height:100%;min-height:220px;object-fit:cover;object-position:50% 35%;display:block}
+.empty>div{padding:26px 30px}
+.empty a.primary{display:inline-block;text-decoration:none}
+.empty p{margin:0 0 16px;font-size:17px;color:var(--ink);max-width:46ch}
+.empty[hidden]{display:none}
+@media (max-width:600px){.empty{grid-template-columns:1fr}.empty img{height:220px}}
 .pcount{position:absolute;bottom:10px;right:10px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff}
 .pup .meta{font-size:14px;color:var(--mute)}
 .gone{margin-top:30px}
@@ -92,7 +98,15 @@ button.ph{cursor:zoom-in}
 .price-note{margin:16px 0 0;font-size:14px;color:var(--mute)}
 
 /* about */
-.about{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:start}
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.about-photos{position:relative;padding:0 0 18% 0}
+.about-photos button{display:block;padding:0;border:0;background:none;cursor:zoom-in;border-radius:14px;overflow:hidden}
+.about-photos img{display:block;width:100%;height:100%;object-fit:cover}
+.ph-main{width:84%;aspect-ratio:4/5;box-shadow:0 18px 40px rgba(29,35,32,.14)}
+.ph-main img{object-position:50% 62%}
+.ph-second{position:absolute;right:0;bottom:0;width:46%;aspect-ratio:4/5;border:6px solid var(--paper)!important;box-shadow:0 14px 30px rgba(29,35,32,.18)}
+.ph-second img{object-position:50% 70%}
+.about-body .factlist{margin-top:8px}
 .about-text p{margin:0 0 16px;font-size:16px}
 .factlist{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:6px 22px;margin:0}
 .factlist div{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule)}
@@ -122,7 +136,10 @@ button.ph{cursor:zoom-in}
 .rating{display:inline-flex;align-items:center;gap:8px;background:var(--moss-soft);color:var(--moss);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .chips span{background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:5px 12px;font-size:13px}
-.raised{margin-top:24px}
+.raised{margin-top:24px;display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center}
+.raised-ph{padding:0;border:0;background:none;cursor:zoom-in;border-radius:10px;overflow:hidden;aspect-ratio:1;display:block}
+.raised-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block}
+@media (max-width:600px){.raised{grid-template-columns:1fr}.raised-ph{aspect-ratio:16/10}}
 
 /* process */
 .stepper{display:grid;grid-template-columns:repeat(var(--n,4),1fr);border:1px solid var(--rule);border-radius:12px 12px 0 0;overflow:hidden;background:var(--card)}
@@ -236,7 +253,7 @@ textarea{min-height:96px;resize:vertical}
 .sum-sec header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .sum-sec h4{margin:0;font-family:'Newsreader',serif;font-weight:500;font-size:19px}
 .sum-sec header button{background:none;border:0;color:var(--moss);font:600 13px 'Figtree',sans-serif;cursor:pointer;text-decoration:underline}
-.sum-sec dl{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:4px 16px;margin:0;font-size:14px}
+.sum-sec dl{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:8px 24px;margin:0;font-size:14px}
 .sum-sec dt{color:var(--mute)}
 .sum-sec dd{margin:0;font-weight:500;word-break:break-word}
 .thanks{padding:34px 30px;display:grid;gap:14px;grid-column:1/-1;max-width:720px}
@@ -373,7 +390,7 @@ section .eyebrow{margin-bottom:8px}
       <span class="pill" id="availPill" hidden><i aria-hidden="true"></i><span id="availText"></span></span>
     </div>
     <div class="pups" id="grid"></div>
-    <div class="empty" id="empty" hidden data-c="puppies-section.emptyText">No puppies are available right now. Apply below and we will contact you when the next litter is ready.</div>
+    <div class="empty" id="empty" hidden><img id="emptyImg" src="images/site/blenheim-portrait.jpg" alt="A Blenheim Cavalier looking up" loading="lazy" width="1100" height="1650"><div><p data-c="puppies-section.emptyText">No puppies are available right now. Apply below and we will contact you when the next litter is ready.</p><a class="primary" href="#apply">Apply for the next litter</a></div></div>
     <div class="gone" id="gone" hidden><h3 data-c="puppies-section.goneTitle">Recently went home</h3><div class="gone-list" id="goneList"></div></div>
     <p class="price-note reveal" id="priceNote" data-c="puppies-section.priceNote">Each price includes a $1,000 non-refundable deposit, which reserves your puppy.</p>
   </section>
@@ -384,6 +401,11 @@ section .eyebrow{margin-bottom:8px}
       <p class="lede" data-c="about.subtitle">Laura Tsekhmister, Brave Heart, Bonney Lake, Washington</p>
     </div>
     <div class="about reveal">
+      <div class="about-photos">
+        <button class="ph-main" type="button" id="aboutPh1"><img src="images/site/laura-eugene.jpg" alt="Laura and Eugene holding two Blenheim Cavaliers in a sunny field" loading="lazy" width="1100" height="1650"></button>
+        <button class="ph-second" type="button" id="aboutPh2"><img src="images/site/walk.jpg" alt="Laura and Eugene walking hand in hand with their Cavaliers" loading="lazy" width="1100" height="1650"></button>
+      </div>
+      <div class="about-body">
       <div class="about-text" id="aboutText" data-list>
         <p>I'm Laura Tsekhmister, the breeder behind Brave Heart. I brought more than a decade of European breeding experience to the US, and I keep learning through specialized seminars on canine reproduction, preservation breeding, and structure and conformation. Understanding the science behind a well-made dog is what led me to purposeful breeding.</p>
         <p>Our goal is simple: healthy, structurally sound, beautiful Cavaliers with sweet temperaments. Our breeding dogs live in our home, and Eugene and I stay in touch with every family long after their puppy goes home.</p>
@@ -395,6 +417,7 @@ section .eyebrow{margin-bottom:8px}
         <div><dt>Club membership</dt><dd>AKC</dd></div>
         <div><dt>Good Dog</dt><dd>Certified breeder since 2023</dd></div>
       </dl>
+      </div>
     </div>
     <div class="showring reveal" id="show">
       <div class="show-head">
@@ -439,9 +462,12 @@ section .eyebrow{margin-bottom:8px}
       </div>
     </div>
     <div class="panel raised reveal">
+      <button class="raised-ph" type="button" id="healthPh"><img src="images/site/blenheim-grass.jpg" alt="A Blenheim Cavalier sitting in sunlit grass" loading="lazy" width="1100" height="1650"></button>
+      <div class="raised-body">
       <h3 data-c="health.raisedTitle">Raised to be confident</h3>
       <p class="lede" style="margin:0" data-c="health.raisedText">Puppies are handled every day and introduced to the experiences they will meet in a family home.</p>
       <div class="chips" id="raisedChips" data-list><span>Daily handling</span><span>Household sounds</span><span>Car rides</span><span>New places</span><span>Scent introduction</span><span>Other dogs</span></div>
+      </div>
     </div>
   </section>
 
@@ -507,163 +533,11 @@ section .eyebrow{margin-bottom:8px}
         <div class="mobile-progress"><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--mute)"><span id="mLabel"></span><span id="mTime"></span></div><div class="bar"><i id="mBar"></i></div></div>
 
         <form class="wiz" id="appForm" novalidate>
-          <fieldset class="on" data-step="0" data-title="Contact">
-            <legend><span class="k">Section 1 of 6</span><span class="h">Contact &amp; basic information</span></legend>
-            <p class="intro-line">How we can reach you about your application.</p>
-            <label class="f">Full name<div class="inwrap"><input name="fullName" required autocomplete="name"><span class="ok" aria-hidden="true">✓</span></div><small class="err"></small></label>
-            <label class="f">Phone number<div class="inwrap"><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="253-555-0123" data-phone><span class="ok" aria-hidden="true">✓</span></div><small class="err"></small></label>
-            <label class="f full">Street address<div class="inwrap"><input name="street" required autocomplete="street-address"><span class="ok" aria-hidden="true">✓</span></div><small class="err"></small></label>
-            <label class="f">City, state, zip code<div class="inwrap"><input name="cityStateZip" required placeholder="Bonney Lake, WA 98391"><span class="ok" aria-hidden="true">✓</span></div><small class="err"></small></label>
-            <label class="f">Email address<div class="inwrap"><input name="email" type="email" required autocomplete="email" maxlength="254"><span class="ok" aria-hidden="true">✓</span></div><small class="err"></small><small class="hint" id="emailHint" hidden></small></label>
-            <label class="f full">Social media handles <span class="opt-note">Instagram or Facebook, optional</span><input name="social" placeholder="@yourhandle"></label>
-          </fieldset>
-
-          <fieldset data-step="1" data-title="Housing">
-            <legend><span class="k">Section 2 of 6</span><span class="h">Housing &amp; living environment</span></legend>
-            <p class="intro-line">Tell us about the home your puppy will live in.</p>
-            <div class="f full" role="radiogroup" aria-label="Home type">What type of home do you live in?
-              <div class="opts inline">
-                <label><input type="radio" name="homeType" value="Single-family home" required><span class="tick"></span>Single-family home</label>
-                <label><input type="radio" name="homeType" value="Townhouse"><span class="tick"></span>Townhouse</label>
-                <label><input type="radio" name="homeType" value="Apartment / condo"><span class="tick"></span>Apartment / condo</label>
-                <label><input type="radio" name="homeType" value="Other"><span class="tick"></span>Other</label>
-              </div><small class="err"></small>
-            </div>
-            <label class="f full hide" data-show="homeOther">Please describe your home<input name="homeOther"><small class="err"></small></label>
-            <div class="f full" role="radiogroup" aria-label="Own or rent">Do you own or rent your home?
-              <div class="opts inline">
-                <label><input type="radio" name="ownRent" value="Own" required><span class="tick"></span>Own</label>
-                <label><input type="radio" name="ownRent" value="Rent"><span class="tick"></span>Rent</label>
-              </div><small class="err"></small>
-            </div>
-            <div class="f full hide" data-show="rent" role="radiogroup" aria-label="Landlord permission">Do you have landlord approval and written permission to own a dog?
-              <div class="opts inline">
-                <label><input type="radio" name="rentPermission" value="Yes" data-req><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="rentPermission" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-            <label class="f full hide" data-show="rent">Are there any pet size or breed restrictions? <span class="opt-note">Optional</span><input name="rentRestrictions" placeholder="e.g. dogs under 25 lbs only, or none"></label>
-            <div class="f full" role="radiogroup" aria-label="Fenced yard">Do you have a fenced yard?
-              <div class="opts inline">
-                <label><input type="radio" name="fenced" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="fenced" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-            <label class="f full hide" data-show="fenceYes">Fence height and type<input name="fenceDetails" data-req placeholder="e.g. 5 ft wood privacy fence"><small class="err"></small></label>
-            <label class="f full hide" data-show="fenceNo">How do you plan to handle potty breaks and daily exercise safely?<textarea name="noFencePlan" data-req></textarea><small class="err"></small></label>
-          </fieldset>
-
-          <fieldset data-step="2" data-title="Family">
-            <legend><span class="k">Section 3 of 6</span><span class="h">Family &amp; lifestyle</span></legend>
-            <p class="intro-line">Who your puppy will share daily life with.</p>
-            <div class="f">Adults in the household<div class="counter"><button type="button" data-dec aria-label="Fewer adults">−</button><input name="adults" type="number" min="1" max="20" value="1" required aria-label="Adults"><button type="button" data-inc aria-label="More adults">+</button></div><small class="err"></small></div>
-            <div class="f">Children in the household<div class="counter"><button type="button" data-dec aria-label="Fewer children">−</button><input name="childCount" type="number" min="0" max="20" value="0" required aria-label="Children"><button type="button" data-inc aria-label="More children">+</button></div><small class="err"></small></div>
-            <label class="f full hide" data-show="kids">Children's ages<input name="childAges" data-req placeholder="e.g. 6 and 9"><small class="err"></small></label>
-            <div class="f full hide" data-show="kids" role="radiogroup" aria-label="Children handling small dogs">Are your children used to handling small, delicate dogs respectfully?
-              <div class="opts inline">
-                <label><input type="radio" name="childHandling" value="Yes" data-req><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="childHandling" value="Still learning"><span class="tick"></span>Still learning</label>
-                <label><input type="radio" name="childHandling" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-            <div class="f full" role="radiogroup" aria-label="Dog allergies">Does anyone in the household have known dog allergies?
-              <div class="opts inline">
-                <label><input type="radio" name="allergies" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="allergies" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-            <div class="f full" role="radiogroup" aria-label="Hours alone">On average, how many hours a day will the puppy be left alone?
-              <div class="opts inline">
-                <label><input type="radio" name="hoursAlone" value="Less than 2" required><span class="tick"></span>Less than 2</label>
-                <label><input type="radio" name="hoursAlone" value="2 to 4"><span class="tick"></span>2 to 4</label>
-                <label><input type="radio" name="hoursAlone" value="4 to 6"><span class="tick"></span>4 to 6</label>
-                <label><input type="radio" name="hoursAlone" value="More than 6"><span class="tick"></span>More than 6</label>
-              </div><small class="err"></small>
-            </div>
-          </fieldset>
-
-          <fieldset data-step="3" data-title="Experience">
-            <legend><span class="k">Section 4 of 6</span><span class="h">Pet ownership &amp; experience</span></legend>
-            <p class="intro-line">There are no wrong answers. First-time owners are welcome.</p>
-            <div class="f full" role="radiogroup" aria-label="Other pets">Do you currently have any other pets?
-              <div class="opts inline">
-                <label><input type="radio" name="hasPets" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="hasPets" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-            <label class="f full hide" data-show="pets">Please list species, breed, age, sex, and whether they are spayed or neutered<textarea name="otherPets" data-req placeholder="e.g. Cat, domestic shorthair, 4 years, female, spayed"></textarea><small class="err"></small></label>
-            <div class="f full" role="radiogroup" aria-label="Dog experience">Have you owned dogs before?
-              <div class="opts">
-                <label><input type="radio" name="dogExperience" value="This would be my first dog" required><span class="tick"></span>No, this would be my first dog</label>
-                <label><input type="radio" name="dogExperience" value="Yes, other breeds"><span class="tick"></span>Yes, other breeds</label>
-                <label><input type="radio" name="dogExperience" value="Yes, including a Cavalier King Charles Spaniel"><span class="tick"></span>Yes, including a Cavalier King Charles Spaniel</label>
-              </div><small class="err"></small>
-            </div>
-            <label class="f full hide" data-show="pastDogs">Where are your past dogs now? <span class="opt-note">e.g. passed away of old age, rehomed</span><textarea name="pastDogs" data-req></textarea><small class="err"></small></label>
-            <div class="f full" role="radiogroup" aria-label="Veterinarian">Do you have an established veterinarian?
-              <div class="opts inline">
-                <label><input type="radio" name="vet" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="vet" value="Not yet"><span class="tick"></span>Not yet</label>
-              </div><small class="err"></small>
-            </div>
-          </fieldset>
-
-          <fieldset data-step="4" data-title="Preferences">
-            <legend><span class="k">Section 5 of 6</span><span class="h">Puppy preferences</span></legend>
-            <p class="intro-line">Colors vary depending on the parent dogs.</p>
-            <label class="f full hide" data-show="puppy">Puppy you are applying for <span class="opt-note">Optional</span><select name="puppy" id="appPuppy"></select></label>
-            <div class="f full" role="radiogroup" aria-label="Color">Color preference
-              <div class="opts inline">
-                <label><input type="radio" name="colour" value="Blenheim" required><span class="tick"></span>Blenheim</label>
-                <label><input type="radio" name="colour" value="Tri-color"><span class="tick"></span>Tri-color</label>
-                <label><input type="radio" name="colour" value="No preference"><span class="tick"></span>Open to either</label>
-              </div><small class="err"></small>
-            </div>
-            <div class="f full" role="radiogroup" aria-label="Gender">Gender preference
-              <div class="opts inline">
-                <label><input type="radio" name="gender" value="Male" required><span class="tick"></span>Male</label>
-                <label><input type="radio" name="gender" value="Female"><span class="tick"></span>Female</label>
-                <label><input type="radio" name="gender" value="No preference"><span class="tick"></span>No preference</label>
-              </div><small class="err"></small>
-            </div>
-            <div class="f full" role="radiogroup" aria-label="Purpose">What is the primary purpose for your puppy?
-              <div class="opts">
-                <label><input type="radio" name="purpose" value="Family companion / pet" required><span class="tick"></span>Family companion / pet</label>
-                <label><input type="radio" name="purpose" value="Show / conformation prospect"><span class="tick"></span>Show / conformation prospect</label>
-                <label><input type="radio" name="purpose" value="Performance / sports (agility, obedience, therapy)"><span class="tick"></span>Performance / sports (agility, obedience, therapy)</label>
-              </div><small class="err"></small>
-            </div>
-            <label class="f full">What temperament or energy level are you looking for? <span class="opt-note">e.g. calm and cuddly, active and outgoing</span><textarea name="temperament"></textarea></label>
-            <div class="f full" role="radiogroup" aria-label="Wait for future litter">If a puppy of your preferred color or gender is not available in the upcoming litter, are you willing to wait for a future litter?
-              <div class="opts inline">
-                <label><input type="radio" name="waitLitter" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="waitLitter" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-          </fieldset>
-
-          <fieldset data-step="5" data-title="Agreement">
-            <legend><span class="k">Section 6 of 6</span><span class="h">Breed commitment &amp; agreement</span></legend>
-            <p class="intro-line">Cavaliers are highly human-centric companions that thrive on closeness and do not do well with isolation.</p>
-            <div class="f full" role="radiogroup" aria-label="Daily affection">Are you ready to provide daily affection and attention?
-              <div class="opts inline">
-                <label><input type="radio" name="dailyCare" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="dailyCare" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-            <div class="f full" role="radiogroup" aria-label="Return to Breeder clause">Are you willing to sign a formal Sales Contract that includes a "Return to Breeder" clause, promising the dog will be returned to us if you can no longer keep it, so it never goes to a shelter?
-              <div class="opts inline">
-                <label><input type="radio" name="returnContract" value="Yes" required><span class="tick"></span>Yes</label>
-                <label><input type="radio" name="returnContract" value="No"><span class="tick"></span>No</label>
-              </div><small class="err"></small>
-            </div>
-          </fieldset>
-
-          <fieldset data-step="6" data-title="Review">
-            <legend><span class="k">Last step</span><span class="h">Review your application</span></legend>
-            <p class="intro-line">Check your answers. Select Edit to change a section.</p>
+          <fieldset id="reviewStep" data-title="Review">
+            <legend><span class="k">Last step</span><span class="h" id="reviewTitle">Review your application</span></legend>
+            <p class="intro-line" id="reviewIntro">Check your answers. Select Edit to change a section.</p>
             <div class="summary" id="wizSummary"></div>
-            <label class="f full">Anything else you would like us to know? <span class="opt-note">Optional</span><textarea name="message"></textarea></label>
+            <label class="f full" id="finalLabel">Anything else you would like us to know? <span class="opt-note">Optional</span><textarea name="message" maxlength="1500"></textarea></label>
             <div class="hp" aria-hidden="true"><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></div>
           </fieldset>
 
@@ -740,7 +614,7 @@ section .eyebrow{margin-bottom:8px}
 let PUPPIES = [], REVIEWS = [], SETTINGS = {}, CONTENT = {};
 document.documentElement.classList.add('cms-loading');
 setTimeout(() => document.documentElement.classList.remove('cms-loading'), 2500); // never hide text for long
-const CONTENT_FILES = ['home', 'puppies-section', 'about', 'health', 'process', 'reviews-section', 'contact', 'application', 'footer'];
+const CONTENT_FILES = ['home', 'puppies-section', 'about', 'health', 'process', 'reviews-section', 'contact', 'application', 'form', 'footer'];
 const contentValue = path => path.split('.').reduce((o, k) => (o && typeof o === 'object') ? o[k] : undefined, CONTENT);
 const txt = (path, fallback) => { const v = contentValue(path); return (typeof v === 'string' && v.trim()) ? v.trim() : fallback; };
 const list = path => { const v = contentValue(path); return Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '') : null; };
@@ -751,6 +625,13 @@ function contactEmail(){
 }
 function initials(name){ return String(name || '').replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase(); }
 function accHTML(items){ return items.filter(i => i && i.title).map(i => `<div class="acc"><button type="button" aria-expanded="false">${esc(i.title)}<span class="chev" aria-hidden="true">▼</span></button><div class="body"><div>${esc(i.text || '')}</div></div></div>`).join(''); }
+function setImg(boxId, path, altPath){
+  const box = $(boxId); if (!box) return; const img = box.querySelector('img'); if (!img) return;
+  const v = contentValue(path);
+  if (v === '' ) { (box.tagName === 'BUTTON' ? box : img).hidden = true; return; }
+  if (typeof v === 'string' && v.trim()) img.src = v.trim().replace(/^\/+/, '');
+  const a = txt(altPath, null); if (a) img.alt = a;
+}
 function applyContent(){
   document.querySelectorAll('[data-c]').forEach(el => { const v = txt(el.dataset.c, null); if (v !== null) el.textContent = v; });
   const photo = txt('home.photo', null);
@@ -767,6 +648,10 @@ function applyContent(){
     }).join('');
     $('stats').hidden = stats.length === 0;
   }
+  setImg('aboutPh1', 'about.photo', 'about.photoAlt');
+  setImg('aboutPh2', 'about.photo2', 'about.photo2Alt');
+  setImg('healthPh', 'health.photo', 'health.photoAlt');
+  setImg('empty', 'puppies-section.emptyPhoto', 'puppies-section.emptyPhotoAlt');
   const about = txt('about.text', null);
   if (about) $('aboutText').innerHTML = about.split(/\n\s*\n/).map(p => `<p>${esc(p.trim())}</p>`).join('');
   const facts = list('about.facts');
@@ -817,6 +702,7 @@ function openLb(items, i){ lbItems = items; lbIdx = i; renderLb(); $('lb').showM
 function renderLb(){ const it = lbItems[lbIdx]; $('lbImg').src = it.url; $('lbImg').alt = it.caption; $('lbCap').textContent = it.caption + (lbItems.length > 1 ? `  ·  ${lbIdx + 1} of ${lbItems.length}` : ''); $('lbPrev').hidden = $('lbNext').hidden = lbItems.length < 2; }
 function lbStep(d){ if (lbItems.length < 2) return; lbIdx = (lbIdx + d + lbItems.length) % lbItems.length; renderLb(); }
 $('heroPhoto').addEventListener('click', () => openLb([{ url: $('heroImg').getAttribute('src'), caption: $('heroImg').alt }], 0));
+['aboutPh1','aboutPh2','healthPh'].forEach(id => $(id).addEventListener('click', () => { const imgs = (id === 'healthPh' ? [$('healthPh')] : [$('aboutPh1'), $('aboutPh2')]).filter(b => !b.hidden).map(b => b.querySelector('img')); openLb(imgs.map(i => ({ url: i.getAttribute('src'), caption: i.alt })), Math.max(0, imgs.indexOf($(id).querySelector('img')))); }));
 $('lbPrev').onclick = () => lbStep(-1); $('lbNext').onclick = () => lbStep(1); $('lbClose').onclick = () => $('lb').close();
 $('lb').addEventListener('keydown', e => { if (e.key === 'ArrowLeft') lbStep(-1); if (e.key === 'ArrowRight') lbStep(1); });
 $('lb').addEventListener('click', e => { if (e.target === $('lb')) $('lb').close(); });
@@ -857,7 +743,7 @@ function renderPuppies(){
     const pic = photosOf(p)[0];
     return `<div class="gone-item"><div class="gph">${pic ? `<img src="${esc(pic)}" alt="${esc(p.name)}" loading="lazy">` : esc(String(p.name).trim().charAt(0))}</div><span>${esc(p.name)}</span><small>Went home</small></div>`;
   }).join('');
-  $('appPuppy').innerHTML = '<option value="">Not decided yet</option>' + current.filter(p => p.status !== 'reserved').map(p => `<option>${esc(p.name)}</option>`).join('');
+  fillPuppySelect();
 }
 $('grid').addEventListener('click', e => {
   const a = e.target.closest('[data-apply]');
@@ -929,14 +815,120 @@ $('revBox').addEventListener('touchend', e => { if (touchX === null) return; con
 document.addEventListener('click', e => { const b = e.target.closest('[data-copy]'); if (b) copyText(b.dataset.copy, 'Copied'); });
 
 /* ---------- application ---------- */
+/* The questions come from data/content/form.json (editable in Pages CMS). DEFAULT_FORM is used until it loads. */
+const DEFAULT_FORM = {"sections": [{"title": "Contact & basic information", "short": "Contact", "intro": "How we can reach you about your application.", "minutes": 2, "questions": [{"label": "Full name", "type": "text", "required": true, "width": "half", "key": "fullName"}, {"label": "Phone number", "type": "phone", "required": true, "width": "half", "placeholder": "253-555-0123", "key": "phone"}, {"label": "Street address", "type": "text", "required": true, "width": "full", "key": "street"}, {"label": "City, state, zip code", "type": "text", "required": true, "width": "half", "placeholder": "Bonney Lake, WA 98391", "key": "cityStateZip"}, {"label": "Email address", "type": "email", "required": true, "width": "half", "key": "email"}, {"label": "Social media handles", "type": "text", "required": false, "width": "full", "note": "Instagram or Facebook", "placeholder": "@yourhandle", "key": "social"}]}, {"title": "Housing & living environment", "short": "Housing", "intro": "Tell us about the home your puppy will live in.", "minutes": 2, "questions": [{"label": "What type of home do you live in?", "type": "choice", "required": true, "width": "full", "options": ["Single-family home", "Townhouse", "Apartment / condo", "Other"], "key": "homeType"}, {"label": "Please describe your home", "type": "text", "required": true, "width": "full", "showIf": "homeType = Other", "key": "homeOther"}, {"label": "Do you own or rent your home?", "type": "choice", "required": true, "width": "full", "options": ["Own", "Rent"], "key": "ownRent"}, {"label": "Do you have landlord approval and written permission to own a dog?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "showIf": "ownRent = Rent", "key": "rentPermission"}, {"label": "Are there any pet size or breed restrictions?", "type": "text", "required": false, "width": "full", "placeholder": "e.g. dogs under 25 lbs only, or none", "showIf": "ownRent = Rent", "key": "rentRestrictions"}, {"label": "Do you have a fenced yard?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "key": "fenced"}, {"label": "Fence height and type", "type": "text", "required": true, "width": "full", "placeholder": "e.g. 5 ft wood privacy fence", "showIf": "fenced = Yes", "key": "fenceDetails"}, {"label": "How do you plan to handle potty breaks and daily exercise safely?", "type": "textarea", "required": true, "width": "full", "showIf": "fenced = No", "key": "noFencePlan"}]}, {"title": "Family & lifestyle", "short": "Family", "intro": "Who your puppy will share daily life with.", "minutes": 1, "questions": [{"label": "Adults in the household", "type": "number", "required": true, "width": "half", "key": "adults", "min": 1, "max": 20}, {"label": "Children in the household", "type": "number", "required": true, "width": "half", "key": "childCount", "min": 0, "max": 20}, {"label": "Children's ages", "type": "text", "required": true, "width": "full", "placeholder": "e.g. 6 and 9", "showIf": "childCount > 0", "key": "childAges"}, {"label": "Are your children used to handling small, delicate dogs respectfully?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "Still learning", "No"], "showIf": "childCount > 0", "key": "childHandling"}, {"label": "Does anyone in the household have known dog allergies?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "key": "allergies"}, {"label": "On average, how many hours a day will the puppy be left alone?", "type": "choice", "required": true, "width": "full", "options": ["Less than 2", "2 to 4", "4 to 6", "More than 6"], "key": "hoursAlone"}]}, {"title": "Pet ownership & experience", "short": "Experience", "intro": "There are no wrong answers. First-time owners are welcome.", "minutes": 2, "questions": [{"label": "Do you currently have any other pets?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "key": "hasPets"}, {"label": "Please list species, breed, age, sex, and whether they are spayed or neutered", "type": "textarea", "required": true, "width": "full", "placeholder": "e.g. Cat, domestic shorthair, 4 years, female, spayed", "showIf": "hasPets = Yes", "key": "otherPets"}, {"label": "Have you owned dogs before?", "type": "choice", "required": true, "width": "full", "options": ["No, this would be my first dog", "Yes, other breeds", "Yes, including a Cavalier King Charles Spaniel"], "key": "dogExperience"}, {"label": "Where are your past dogs now?", "type": "textarea", "required": true, "width": "full", "note": "e.g. passed away of old age, rehomed", "showIf": "dogExperience != No, this would be my first dog", "key": "pastDogs"}, {"label": "Do you have an established veterinarian?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "Not yet"], "key": "vet"}]}, {"title": "Puppy preferences", "short": "Preferences", "intro": "Colors vary depending on the parent dogs.", "minutes": 2, "questions": [{"label": "Puppy you are applying for", "type": "puppy", "required": false, "width": "full", "key": "puppy"}, {"label": "Color preference", "type": "choice", "required": true, "width": "full", "options": ["Blenheim", "Tri-color", "Open to either"], "key": "colour"}, {"label": "Gender preference", "type": "choice", "required": true, "width": "full", "options": ["Male", "Female", "No preference"], "key": "gender"}, {"label": "What is the primary purpose for your puppy?", "type": "choice", "required": true, "width": "full", "options": ["Family companion / pet", "Show / conformation prospect", "Performance / sports (agility, obedience, therapy)"], "key": "purpose"}, {"label": "What temperament or energy level are you looking for?", "type": "textarea", "required": false, "width": "full", "note": "e.g. calm and cuddly, active and outgoing", "key": "temperament"}, {"label": "If a puppy of your preferred color or gender is not available in the upcoming litter, are you willing to wait for a future litter?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "key": "waitLitter"}]}, {"title": "Breed commitment & agreement", "short": "Agreement", "intro": "Cavaliers are highly human-centric companions that thrive on closeness and do not do well with isolation.", "minutes": 1, "questions": [{"label": "Are you ready to provide daily affection and attention?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "key": "dailyCare"}, {"label": "Are you willing to sign a formal Sales Contract that includes a \"Return to Breeder\" clause, promising the dog will be returned to us if you can no longer keep it, so it never goes to a shelter?", "type": "choice", "required": true, "width": "full", "options": ["Yes", "No"], "key": "returnContract"}]}], "reviewTitle": "Review your application", "reviewIntro": "Check your answers. Select Edit to change a section.", "finalQuestion": "Anything else you would like us to know?"};
 const form = $('appForm');
-const fieldsets = [...form.querySelectorAll('fieldset')];
-const TOTAL = fieldsets.length;
-const MINUTES = [2, 2, 1, 2, 2, 1, 1];
 const DRAFT_KEY = 'bh-application';
-let wizStep = 0, maxStep = 0;
+let FORM = DEFAULT_FORM, QUESTIONS = [], fieldsets = [], TOTAL = 0, MINUTES = [], wizStep = 0, maxStep = 0;
 
-$('sideNav').innerHTML = fieldsets.map((fs, i) => `<li data-i="${i}"><button type="button" data-goto="${i}"><span class="dot">${i < TOTAL - 1 ? i + 1 : '✓'}</span>${esc(fs.dataset.title)}</button></li>`).join('');
+const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').slice(0, 6).map((w, i) => i ? w[0].toUpperCase() + w.slice(1) : w).join('') || 'question';
+function normalizeForm(raw){
+  const secs = (raw && Array.isArray(raw.sections) ? raw.sections : []).filter(s => s && Array.isArray(s.questions) && s.questions.some(q => q && q.label));
+  if (!secs.length) return null;
+  const used = new Set(['company', 'message']);
+  secs.forEach(s => {
+    s.questions = s.questions.filter(q => q && String(q.label || '').trim());
+    s.questions.forEach(q => {
+      let k = String(q.key || '').trim().replace(/[^A-Za-z0-9_]/g, '') || slug(q.label), base = k, n = 2;
+      while (used.has(k)) k = base + n++;
+      used.add(k); q.key = k;
+      q.type = String(q.type || 'text'); q.label = String(q.label).trim();
+      q.options = (Array.isArray(q.options) ? q.options : []).map(o => String(o ?? '').trim()).filter(Boolean);
+      if ((q.type === 'choice' || q.type === 'dropdown') && !q.options.length) q.type = 'text';
+    });
+  });
+  return { ...raw, sections: secs };
+}
+/* "ownRent = Rent", "childCount > 0", "dogExperience != No, ..." */
+function parseShowIf(s){
+  const m = String(s || '').trim().match(/^([A-Za-z0-9_]+)\s*(!=|=|>|<)\s*(.*)$/);
+  return m ? { key: m[1], op: m[2], val: m[3].trim().toLowerCase() } : null;
+}
+function shown(q, v){
+  if (q.type === 'puppy') return PUPPIES.some(p => p && p.name && p.status !== 'reserved' && p.status !== 'went-home');
+  const c = parseShowIf(q.showIf); if (!c) return true;
+  const ref = QUESTIONS.find(x => x.key === c.key);
+  if (ref && !shown(ref, v)) return false;
+  const a = String(v[c.key] ?? '').trim().toLowerCase();
+  if (c.op === '=') return a === c.val;
+  if (c.op === '!=') return a !== '' && a !== c.val;
+  if (a === '' || isNaN(a)) return false;
+  return c.op === '>' ? Number(a) > Number(c.val) : Number(a) < Number(c.val);
+}
+function noteHTML(q){
+  const parts = [q.note ? esc(q.note) : '', !q.required && q.type !== 'puppy' ? 'Optional' : (q.type === 'puppy' ? 'Optional' : '')].filter(Boolean);
+  return parts.length ? ` <span class="opt-note">${parts.join(' · ')}</span>` : '';
+}
+function questionHTML(q){
+  const full = q.width === 'half' && !['choice', 'textarea'].includes(q.type) ? '' : ' full';
+  const req = q.required ? ' data-req' : '';
+  const ph = q.placeholder ? ` placeholder="${esc(q.placeholder)}"` : '';
+  const ok = '<span class="ok" aria-hidden="true">✓</span>';
+  const attrs = `class="f${full}" data-q="${esc(q.key)}"`;
+  const name = esc(q.key), label = esc(q.label) + noteHTML(q);
+  switch (q.type) {
+    case 'choice': {
+      const inline = q.options.length <= 4 && q.options.every(o => o.length <= 22);
+      return `<div ${attrs} role="radiogroup" aria-label="${esc(q.label)}">${label}<div class="opts${inline ? ' inline' : ''}">${q.options.map(o => `<label><input type="radio" name="${name}" value="${esc(o)}"${req}><span class="tick"></span>${esc(o)}</label>`).join('')}</div><small class="err"></small></div>`;
+    }
+    case 'dropdown':
+      return `<label ${attrs}>${label}<select name="${name}"${req}><option value="">Choose…</option>${q.options.map(o => `<option>${esc(o)}</option>`).join('')}</select><small class="err"></small></label>`;
+    case 'puppy':
+      return `<label ${attrs}>${label}<select name="${name}" class="pup-select"><option value="">Not decided yet</option></select></label>`;
+    case 'textarea':
+      return `<label ${attrs}>${label}<textarea name="${name}"${req}${ph}></textarea><small class="err"></small></label>`;
+    case 'number': {
+      const min = Number.isFinite(+q.min) && q.min !== '' && q.min != null ? +q.min : 0, max = Number.isFinite(+q.max) && q.max !== '' && q.max != null ? +q.max : 20;
+      return `<div ${attrs}>${label}<div class="counter"><button type="button" data-dec aria-label="Less">−</button><input name="${name}" type="number" min="${min}" max="${max}" value="${min}"${req} aria-label="${esc(q.label)}"><button type="button" data-inc aria-label="More">+</button></div><small class="err"></small></div>`;
+    }
+    case 'email':
+      return `<label ${attrs}>${label}<div class="inwrap"><input name="${name}" type="email" autocomplete="email" maxlength="254"${req}${ph}>${ok}</div><small class="err"></small><small class="hint email-hint" hidden></small></label>`;
+    case 'phone':
+      return `<label ${attrs}>${label}<div class="inwrap"><input name="${name}" type="tel" autocomplete="tel" inputmode="tel" data-phone${req}${ph || ' placeholder="253-555-0123"'}>${ok}</div><small class="err"></small></label>`;
+    default: {
+      const ac = q.key === 'fullName' ? ' autocomplete="name"' : q.key === 'street' ? ' autocomplete="street-address"' : '';
+      return `<label ${attrs}>${label}<div class="inwrap"><input name="${name}"${ac}${req}${ph}>${ok}</div><small class="err"></small></label>`;
+    }
+  }
+}
+function buildForm(schema){
+  const keep = rawVals();
+  FORM = schema; QUESTIONS = FORM.sections.flatMap(s => s.questions);
+  form.querySelectorAll('fieldset[data-gen]').forEach(f => f.remove());
+  const n = FORM.sections.length, review = $('reviewStep');
+  FORM.sections.forEach((s, i) => {
+    review.insertAdjacentHTML('beforebegin', `<fieldset data-gen data-title="${esc(s.short || s.title)}"><legend><span class="k">Section ${i + 1} of ${n}</span><span class="h">${esc(s.title)}</span></legend>${s.intro ? `<p class="intro-line">${esc(s.intro)}</p>` : ''}${s.questions.map(questionHTML).join('')}</fieldset>`);
+  });
+  $('reviewTitle').textContent = FORM.reviewTitle || 'Review your application';
+  $('reviewIntro').textContent = FORM.reviewIntro || 'Check your answers. Select Edit to change a section.';
+  $('finalLabel').firstChild.textContent = (FORM.finalQuestion || 'Anything else you would like us to know?') + ' ';
+  fieldsets = [...form.querySelectorAll('fieldset')];
+  TOTAL = fieldsets.length;
+  MINUTES = FORM.sections.map(s => Math.max(1, Math.round(Number(s.minutes) || 1))).concat(1);
+  $('sideNav').innerHTML = fieldsets.map((fs, i) => `<li data-i="${i}"><button type="button" data-goto="${i}"><span class="dot">${i < TOTAL - 1 ? i + 1 : '✓'}</span>${esc(fs.dataset.title)}</button></li>`).join('');
+  form.querySelectorAll('input:not([type=radio]):not([type=number])').forEach(i => { if (i.maxLength < 0) i.maxLength = 150; });
+  form.querySelectorAll('textarea').forEach(t => { if (t.maxLength < 0) t.maxLength = 1500; });
+  fillPuppySelect();
+  restoreVals(keep);
+  syncConditionals();
+  maxStep = Math.min(maxStep, TOTAL - 1);
+  goStep(Math.min(wizStep, TOTAL - 1));
+}
+function fillPuppySelect(){
+  const names = PUPPIES.filter(p => p && String(p.name || '').trim() && p.status !== 'reserved' && p.status !== 'went-home').map(p => String(p.name).trim());
+  form.querySelectorAll('.pup-select').forEach(sel => { const cur = sel.value; sel.innerHTML = '<option value="">Not decided yet</option>' + names.map(n => `<option>${esc(n)}</option>`).join(''); if (names.includes(cur)) sel.value = cur; });
+}
+function rawVals(){ const v = {}; if (form) new FormData(form).forEach((val, k) => { v[k] = String(val); }); return v; }
+function restoreVals(v){
+  Object.entries(v || {}).forEach(([k, val]) => {
+    form.querySelectorAll(`[name="${CSS.escape(k)}"]`).forEach(el => {
+      if (el.type === 'radio') el.checked = el.value === val;
+      else if (el.tagName === 'SELECT') { if ([...el.options].some(o => o.value === val)) el.value = val; else if (el.classList.contains('pup-select') && val) { el.insertAdjacentHTML('beforeend', `<option>${esc(val)}</option>`); el.value = val; } }
+      else el.value = val;
+    });
+  });
+}
+
 $('sideNav').addEventListener('click', e => { const b = e.target.closest('[data-goto]'); if (b && !b.disabled) goStep(+b.dataset.goto); });
 
 function vals(){
@@ -945,25 +937,27 @@ function vals(){
 /* Follow-up questions appear only when they apply. */
 function syncConditionals(){
   const v = vals();
-  const rules = {
-    homeOther: v.homeType === 'Other', rent: v.ownRent === 'Rent', fenceYes: v.fenced === 'Yes', fenceNo: v.fenced === 'No',
-    kids: Number(v.childCount) > 0, pets: v.hasPets === 'Yes', pastDogs: !!v.dogExperience && v.dogExperience !== 'This would be my first dog',
-    puppy: PUPPIES.some(p => p.status !== 'reserved')
-  };
-  Object.entries(rules).forEach(([key, on]) => form.querySelectorAll(`[data-show="${key}"]`).forEach(el => {
+  QUESTIONS.forEach(q => {
+    const el = form.querySelector(`[data-q="${CSS.escape(q.key)}"]`); if (!el) return;
+    const on = shown(q, v);
     const was = !el.classList.contains('hide');
     el.classList.toggle('hide', !on);
-    if (on && !was && !reduceMotion) { el.classList.remove('reveal-in'); void el.offsetWidth; el.classList.add('reveal-in'); }
+    if (on && !was && !reduceMotion && el.offsetParent !== null) { el.classList.remove('reveal-in'); void el.offsetWidth; el.classList.add('reveal-in'); }
     el.querySelectorAll('[data-req]').forEach(inp => { inp.required = on; });
-  }));
-  if (rules.homeOther) form.querySelector('[name="homeOther"]').required = true; else form.querySelector('[name="homeOther"]').required = false;
+  });
 }
 /* Field rules. Each returns an error message, or '' when the value is fine. */
 const detail = v => v.replace(/\s+/g, ' ').length < 10 ? 'Please add a little more detail.' : '';
-const wholeNumber = v => /^\d+$/.test(v) ? '' : 'Please enter a whole number.';
 const RULES = {
   fullName: v => !/^[A-Za-zÀ-ÖØ-öø-ÿ'’.\- ]+$/.test(v) ? 'Names can only contain letters, spaces, hyphens, and apostrophes.'
     : v.split(/\s+/).filter(Boolean).length < 2 ? 'Please enter your first and last name.' : '',
+  street: v => !/\d/.test(v) || !/[A-Za-z]{2,}/.test(v) ? 'Please include your house number and street name.' : '',
+  cityStateZip: v => !/[A-Za-z]{2,}/.test(v) ? 'Please include your city and state.'
+    : !/\b\d{5}(-\d{4})?$/.test(v) ? 'Please end with your 5-digit ZIP code, for example: Bonney Lake, WA 98391.' : '',
+  childAges: v => /\d/.test(v) ? '' : 'Please list ages as numbers, for example: 6 and 9.',
+  noFencePlan: detail, otherPets: detail, pastDogs: detail
+};
+const TYPE_RULES = {
   phone: v => {
     const d = v.replace(/\D/g, '');
     if (d.length !== 10) return 'Please enter a 10-digit phone number, including the area code.';
@@ -971,14 +965,10 @@ const RULES = {
     if (/^\d{3}[01]/.test(d)) return 'Please check the number. The digit after the area code cannot be 0 or 1.';
     return '';
   },
-  street: v => !/\d/.test(v) || !/[A-Za-z]{2,}/.test(v) ? 'Please include your house number and street name.' : '',
-  cityStateZip: v => !/[A-Za-z]{2,}/.test(v) ? 'Please include your city and state.'
-    : !/\b\d{5}(-\d{4})?$/.test(v) ? 'Please end with your 5-digit ZIP code, for example: Bonney Lake, WA 98391.' : '',
   email: v => /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(v) ? '' : 'Please enter a valid email address, for example: name@example.com.',
-  adults: wholeNumber, childCount: wholeNumber,
-  childAges: v => /\d/.test(v) ? '' : 'Please list ages as numbers, for example: 6 and 9.',
-  noFencePlan: detail, otherPets: detail, pastDogs: detail
+  number: v => /^\d+$/.test(v) ? '' : 'Please enter a whole number.'
 };
+const qOf = name => QUESTIONS.find(q => q.key === name);
 /* Suggest a fix for common email typos such as gmial.com or yahoo.con. */
 const DOMAINS = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'aol.com', 'comcast.net', 'live.com', 'msn.com', 'me.com'];
 function lev(a, b){
@@ -995,16 +985,16 @@ function emailSuggestion(v){
   DOMAINS.forEach(d => { const x = lev(dom, d); if (x < dist) { dist = x; best = d; } });
   return best ? `${m[1]}@${best}` : '';
 }
-function updateEmailHint(){
-  const inp = form.querySelector('[name="email"]'), hint = $('emailHint');
+function updateEmailHint(inp){
+  const hint = inp.closest('.f').querySelector('.email-hint'); if (!hint) return;
   const s = emailSuggestion(inp.value);
   hint.hidden = !s;
   if (s) hint.innerHTML = `Did you mean <button type="button" data-email="${esc(s)}">${esc(s)}</button>?`;
 }
-$('emailHint').addEventListener('click', e => {
+form.addEventListener('click', e => {
   const b = e.target.closest('[data-email]'); if (!b) return;
   e.preventDefault();
-  const inp = form.querySelector('[name="email"]'); inp.value = b.dataset.email;
+  const inp = b.closest('.f').querySelector('input[type=email]'); inp.value = b.dataset.email;
   inp.dispatchEvent(new Event('input', { bubbles: true })); checkWrap(inp.closest('.f')); inp.focus();
 });
 
@@ -1018,15 +1008,16 @@ function checkWrap(w){
     const req = inputs.some(i => i.required);
     if (req && !inputs.some(i => i.checked)) msg = 'Please choose an option.';
   } else {
-    const el = inputs[0], val = el.value.trim();
-    if (el.required && !val) msg = 'This field is required.';
+    const el = inputs[0], val = el.value.trim(), q = qOf(el.name);
+    if (el.required && !val) msg = el.tagName === 'SELECT' ? 'Please choose an option.' : 'This field is required.';
     else if (val && RULES[el.name]) msg = RULES[el.name](val) || '';
+    else if (val && q && TYPE_RULES[q.type]) msg = TYPE_RULES[q.type](val) || '';
     if (!msg && el.type === 'number' && val !== '' && (Number(val) < Number(el.min) || Number(val) > Number(el.max))) msg = `Please enter a number from ${el.min} to ${el.max}.`;
   }
   const err = w.querySelector('.err'); if (err) err.textContent = msg;
   w.classList.toggle('invalid', !!msg);
   const hasVal = inputs[0].type === 'radio' ? inputs.some(i => i.checked) : inputs[0].value.trim() !== '';
-  w.classList.toggle('valid', !msg && hasVal && inputs[0].type !== 'radio');
+  w.classList.toggle('valid', !msg && hasVal && inputs[0].type !== 'radio' && inputs[0].tagName !== 'SELECT');
   return !msg;
 }
 function checkStep(i){
@@ -1050,7 +1041,7 @@ form.addEventListener('input', e => {
     t.value = d.length > 6 ? `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}` : d.length > 3 ? `${d.slice(0, 3)}-${d.slice(3)}` : d;
   }
   const w = t.closest('.f'); if (w && (w.classList.contains('invalid') || w.classList.contains('valid') || t.type === 'radio')) checkWrap(w);
-  if (t.name === 'email') updateEmailHint();
+  if (t.type === 'email') updateEmailHint(t);
   syncConditionals(); saveDraft();
 });
 form.addEventListener('change', () => { syncConditionals(); saveDraft(); });
@@ -1072,7 +1063,7 @@ function goStep(i){
     if (k === i) li.querySelector('button').setAttribute('aria-current', 'step'); else li.querySelector('button').removeAttribute('aria-current');
   });
   const mins = MINUTES.slice(i).reduce((a, b) => a + b, 0);
-  const timeText = i === TOTAL - 1 ? 'Almost done' : `About ${mins} minutes left`;
+  const timeText = i === TOTAL - 1 ? 'Almost done' : `About ${mins} minute${mins === 1 ? '' : 's'} left`;
   $('timeLeft').textContent = timeText; $('mTime').textContent = timeText;
   $('mLabel').textContent = i < TOTAL - 1 ? `Section ${i + 1} of ${TOTAL - 1}: ${fieldsets[i].dataset.title}` : 'Review';
   $('mBar').style.width = ((i + 1) / TOTAL * 100) + '%';
@@ -1084,35 +1075,33 @@ function goStep(i){
 }
 function scrollToForm(){ const top = $('appBox').getBoundingClientRect().top; if (top < 0 || top > innerHeight * .5) $('appBox').scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' }); }
 
-const LABELS = [
-  ['Contact', 0, [['fullName','Full name'],['phone','Phone'],['street','Street address'],['cityStateZip','City, state, zip'],['email','Email'],['social','Social media']]],
-  ['Housing', 1, [['homeType','Home type'],['homeOther','Home details'],['ownRent','Own or rent'],['rentPermission','Landlord permission'],['rentRestrictions','Pet restrictions'],['fenced','Fenced yard'],['fenceDetails','Fence'],['noFencePlan','Plan without a fence']]],
-  ['Family', 2, [['adults','Adults'],['childCount','Children'],['childAges','Children\'s ages'],['childHandling','Children handle small dogs'],['allergies','Dog allergies'],['hoursAlone','Hours alone a day']]],
-  ['Experience', 3, [['hasPets','Other pets'],['otherPets','Pet details'],['dogExperience','Dog experience'],['pastDogs','Past dogs'],['vet','Established vet']]],
-  ['Preferences', 4, [['puppy','Puppy applied for'],['colour','Color'],['gender','Gender'],['purpose','Purpose'],['temperament','Temperament'],['waitLitter','Willing to wait']]],
-  ['Agreement', 5, [['dailyCare','Daily affection and attention'],['returnContract','Return to Breeder clause']]]
-];
-function visibleVals(){
-  const v = vals();
-  form.querySelectorAll('.hide [name], [name].hide').forEach(el => { delete v[el.name]; });
-  return v;
+/* The answers that apply, in order, with their section and question text. */
+function answerItems(){
+  const v = vals(), items = [];
+  FORM.sections.forEach(s => s.questions.forEach(q => {
+    if (shown(q, v) && v[q.key]) items.push({ key: q.key, type: q.type, section: s.short || s.title, label: q.label, value: v[q.key] });
+  }));
+  if (v.message) items.push({ key: 'message', type: 'textarea', section: 'Anything else', label: FORM.finalQuestion || 'Anything else you would like us to know?', value: v.message });
+  return items;
 }
 function buildSummary(){
-  const v = visibleVals();
-  $('wizSummary').innerHTML = LABELS.map(([title, step, fields]) => {
-    const rows = fields.filter(([k]) => v[k]).map(([k, l]) => `<dt>${esc(l)}</dt><dd>${esc(v[k])}</dd>`).join('');
-    return `<div class="sum-sec"><header><h4>${esc(title)}</h4><button type="button" data-goto="${step}">Edit</button></header><dl>${rows}</dl></div>`;
+  const items = answerItems();
+  $('wizSummary').innerHTML = FORM.sections.map((s, step) => {
+    const rows = items.filter(it => it.section === (s.short || s.title) && it.key !== 'message').map(it => `<dt>${esc(it.label)}</dt><dd>${esc(it.value)}</dd>`).join('');
+    return `<div class="sum-sec"><header><h4>${esc(s.short || s.title)}</h4><button type="button" data-goto="${step}">Edit</button></header><dl>${rows}</dl></div>`;
   }).join('');
 }
 $('wizSummary').addEventListener('click', e => { const b = e.target.closest('[data-goto]'); if (b) { goStep(+b.dataset.goto); scrollToForm(); } });
 function applicationText(){
-  const v = visibleVals(); const out = ['CAVALIER KING CHARLES SPANIEL PUPPY APPLICATION'];
-  LABELS.forEach(([title, , fields]) => {
-    const rows = fields.filter(([k]) => v[k]).map(([k, l]) => `${l}: ${v[k]}`);
-    if (rows.length) out.push('', title.toUpperCase(), ...rows);
-  });
-  if (v.message) out.push('', 'ANYTHING ELSE', v.message);
+  const out = ['CAVALIER KING CHARLES SPANIEL PUPPY APPLICATION']; let last = '';
+  answerItems().forEach(it => { if (it.section !== last) { out.push('', it.section.toUpperCase()); last = it.section; } out.push(`${it.label}: ${it.value}`); });
   return out.join('\n');
+}
+function contactInfo(){
+  const items = answerItems();
+  const by = t => (items.find(it => it.type === t) || {}).value || '';
+  const nameItem = items.find(it => it.key === 'fullName') || items.find(it => /name/i.test(it.label) && it.type === 'text');
+  return { name: nameItem ? nameItem.value : '', email: by('email'), phone: by('phone') };
 }
 
 /* Answers stay on this device so a refresh does not lose them. */
@@ -1126,9 +1115,7 @@ function saveDraft(){
 function loadDraft(){
   try {
     const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); if (!d) return null;
-    Object.entries(d.v || {}).forEach(([k, val]) => {
-      form.querySelectorAll(`[name="${CSS.escape(k)}"]`).forEach(el => { if (el.type === 'radio') el.checked = el.value === val; else el.value = val; });
-    });
+    restoreVals(d.v);
     const n = $('savedNote'); n.textContent = 'Your saved answers were restored'; n.classList.add('on');
     return d;
   } catch (e) { return null; }
@@ -1137,7 +1124,7 @@ function clearDraft(){ try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} 
 
 function startFor(name){
   $('thanks').hidden = true; $('appMain').hidden = false; $('appBox').querySelector('.side').hidden = false;
-  $('appPuppy').value = name || '';
+  form.querySelectorAll('.pup-select').forEach(sel => { sel.value = name || ''; });
   syncConditionals(); saveDraft();
   $('apply').scrollIntoView();
   toast(name ? `Applying for ${name}` : 'Application started');
@@ -1149,7 +1136,7 @@ form.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagNam
 let sending = false;
 function showThanks(sent, email){
   $('sentNote').hidden = !sent;
-  if (sent) $('sentNote').textContent = txt('application.sentMessage', "We have received your application and emailed a confirmation to {email}. Laura will be in touch soon. If you don't see the email, please check your spam folder.").replace(/\{email\}/g, email);
+  if (sent) $('sentNote').textContent = txt('application.sentMessage', "Thank you! We have received your application and will get back to you within 48 hours. A confirmation has been sent to {email}. If you don't see it, please check your spam folder.").replace(/\{email\}/g, email);
   $('sendTitle').textContent = sent ? 'Keep a copy for your records' : 'One last step: send it to us';
   $('sendText').textContent = sent ? 'Optional. You can copy your answers below.' : txt('application.fallbackMessage', 'We could not send your application automatically. Please copy it and email it to braveheartcavaliers@gmail.com, or text it to Laura at 360-702-2367.');
   $('mailApp').hidden = sent;
@@ -1159,11 +1146,12 @@ function showThanks(sent, email){
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (wizStep < TOTAL - 1 || sending) return;
-  for (let i = 0; i < TOTAL - 1; i++) if (!fieldsets[i].querySelectorAll('.f').length || ![...fieldsets[i].querySelectorAll('.f')].every(w => checkWrap(w))) { goStep(i); checkStep(i); toast('Please complete this section first'); return; }
+  for (let i = 0; i < TOTAL - 1; i++) if (![...fieldsets[i].querySelectorAll('.f')].every(w => checkWrap(w))) { goStep(i); checkStep(i); toast('Please complete this section first'); return; }
   if (form.querySelector('[name="company"]').value) return;
-  const answers = visibleVals(); delete answers.company;
+  const items = answerItems(), contact = contactInfo();
+  const answers = {}; items.forEach(it => { answers[it.key] = it.value; });
   $('appText').value = applicationText();
-  $('mailApp').href = 'mailto:' + contactEmail() + '?subject=' + encodeURIComponent('Puppy application from ' + (answers.fullName || ''));
+  $('mailApp').href = 'mailto:' + contactEmail() + '?subject=' + encodeURIComponent('Puppy application from ' + (contact.name || ''));
   const url = String(SETTINGS.applicationsUrl || '').trim();
   let sent = false;
   if (/^https:\/\/script\.google\.com\//.test(url)) {
@@ -1172,14 +1160,14 @@ form.addEventListener('submit', async e => {
     try {
       const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), 30000);
       // Sent as plain text so the browser does not need a CORS preflight.
-      const res = await fetch(url, { method: 'POST', body: JSON.stringify({ answers, startedAt, page: location.href }), signal: ctrl.signal });
+      const res = await fetch(url, { method: 'POST', body: JSON.stringify({ contact, items: items.map(({ section, label, value }) => ({ section, label, value })), answers, startedAt, page: location.href }), signal: ctrl.signal });
       clearTimeout(timer);
       const out = await res.json();
       sent = !!(out && out.ok);
     } catch (err) { sent = false; }
     sending = false; btn.disabled = false; btn.textContent = 'Submit application';
   }
-  showThanks(sent, answers.email);
+  showThanks(sent, contact.email);
   if (sent) clearDraft();
 });
 $('copyApp').addEventListener('click', () => copyText($('appText').value, 'Application copied. Paste it into an email or text.'));
@@ -1223,8 +1211,7 @@ addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* ---------- start ---------- */
-form.querySelectorAll('input:not([type=radio]):not([type=number])').forEach(i => { if (i.maxLength < 0) i.maxLength = 150; });
-form.querySelectorAll('textarea').forEach(t => { if (t.maxLength < 0) t.maxLength = 1500; });
+buildForm(normalizeForm(DEFAULT_FORM));
 const draft = loadDraft();
 syncConditionals();
 if (draft) { maxStep = Math.min(draft.max || 0, TOTAL - 1); goStep(Math.min(draft.step || 0, TOTAL - 1)); } else goStep(0);
@@ -1238,13 +1225,15 @@ async function getJSON(path, fallback){
   const contentParts = await Promise.all(CONTENT_FILES.map(n => getJSON(`data/content/${n}.json`, null)));
   CONTENT_FILES.forEach((n, i) => { if (contentParts[i] && typeof contentParts[i] === 'object') CONTENT[n] = contentParts[i]; });
   try { applyContent(); } catch (err) { console.error(err); }
+  try { const f = normalizeForm(CONTENT.form); if (f) buildForm(f); } catch (err) { console.error(err); }
   document.documentElement.classList.remove('cms-loading');
   [PUPPIES, REVIEWS, SETTINGS] = await Promise.all([getJSON('data/puppies.json', []), getJSON('data/reviews.json', []), getJSON('data/settings.json', {})]);
   if (!Array.isArray(PUPPIES)) PUPPIES = [];
   REVIEWS = Array.isArray(REVIEWS) ? REVIEWS.filter(r => r && r.text) : [];
   if (!SETTINGS || typeof SETTINGS !== 'object') SETTINGS = {};
   renderPuppies();
-  if (draft && draft.v && draft.v.puppy) $('appPuppy').value = draft.v.puppy;
+  fillPuppySelect();
+  if (draft && draft.v) restoreVals(Object.fromEntries(Object.entries(draft.v).filter(([k]) => (qOf(k) || {}).type === 'puppy')));
   syncConditionals();
   if (REVIEWS.length) { $('revTotal').textContent = `${REVIEWS.length} verified owner stories`; renderReview(); revAuto(); }
   else { $('reviews').hidden = true; document.querySelectorAll('a[href="#reviews"]').forEach(a => a.hidden = true); }

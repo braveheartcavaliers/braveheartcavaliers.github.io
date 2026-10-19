@@ -179,6 +179,14 @@ content:
     - name: emptyText
       label: Message when no puppies are listed
       type: text
+    - name: emptyPhoto
+      label: Photo shown when no puppies are listed
+      type: image
+      options:
+        media: site
+    - name: emptyPhotoAlt
+      label: Description of that photo
+      type: string
     - name: goneTitle
       label: Heading for puppies that went home
       type: string
@@ -199,6 +207,24 @@ content:
       type: string
     - name: subtitle
       label: Line under the heading
+      type: string
+    - name: photo
+      label: Main photo
+      type: image
+      description: The large photo beside the about text.
+      options:
+        media: site
+    - name: photoAlt
+      label: Main photo description
+      type: string
+    - name: photo2
+      label: Second photo
+      type: image
+      description: The smaller photo that overlaps the main one.
+      options:
+        media: site
+    - name: photo2Alt
+      label: Second photo description
       type: string
     - name: text
       label: About text
@@ -290,6 +316,15 @@ content:
       - name: text
         label: Text
         type: text
+    - name: photo
+      label: Socialization photo
+      type: image
+      description: The square photo in the "Raised to be confident" box.
+      options:
+        media: site
+    - name: photoAlt
+      label: Photo description
+      type: string
     - name: raisedTitle
       label: Socialization heading
       type: string
@@ -378,7 +413,7 @@ content:
         label: Note (for example "Text messages only")
         type: string
   - name: application
-    label: 8. Application (texts)
+    label: 8. Application (messages and emails)
     type: file
     path: data/content/application.json
     format: json
@@ -408,8 +443,124 @@ content:
     - name: fallbackMessage
       label: Message if sending fails
       type: text
+    - name: confirmationSubject
+      label: Confirmation email subject
+      type: string
+      description: The subject of the email the applicant receives.
+    - name: confirmationText
+      label: Confirmation email message
+      type: text
+      description: The opening of the email the applicant receives. A copy of their answers is added below it.
+  - name: form
+    label: 9. Application questions
+    type: file
+    path: data/content/form.json
+    format: json
+    fields:
+    - name: sections
+      label: Sections
+      type: object
+      list: true
+      description: Each section is one step of the application. Drag to reorder.
+      fields:
+      - name: title
+        label: Section heading
+        type: string
+        required: true
+      - name: short
+        label: Short name for the side menu
+        type: string
+        description: For example "Housing".
+      - name: intro
+        label: Line under the heading
+        type: string
+      - name: minutes
+        label: Minutes to complete
+        type: number
+        description: Used for the "About X minutes left" estimate.
+      - name: questions
+        label: Questions
+        type: object
+        list: true
+        fields:
+        - name: label
+          label: Question
+          type: string
+          required: true
+        - name: type
+          label: Answer type
+          type: select
+          default: text
+          options:
+            values:
+            - name: text
+              label: Short text
+            - name: textarea
+              label: Long text
+            - name: choice
+              label: Choose one (buttons)
+            - name: dropdown
+              label: Choose one (dropdown list)
+            - name: number
+              label: Number with + and − buttons
+            - name: email
+              label: Email address
+            - name: phone
+              label: Phone number
+            - name: puppy
+              label: Pick from available puppies
+        - name: options
+          label: Choices
+          type: string
+          list: true
+          description: Only for "Choose one" questions. One choice per line.
+        - name: required
+          label: Required
+          type: boolean
+          default: true
+        - name: width
+          label: Width
+          type: select
+          default: full
+          options:
+            values:
+            - name: full
+              label: Full width
+            - name: half
+              label: Half width (two short questions side by side)
+        - name: note
+          label: Small hint next to the question
+          type: string
+        - name: placeholder
+          label: Example text inside the empty box
+          type: string
+        - name: showIf
+          label: Only show when (optional)
+          type: string
+          description: 'Show this question only after a certain answer. Write the other question''s ID, then = and the answer. Examples: ownRent = Rent, childCount > 0, fenced = No.'
+        - name: min
+          label: Lowest number
+          type: number
+          description: Only for number questions.
+        - name: max
+          label: Highest number
+          type: number
+          description: Only for number questions.
+        - name: key
+          label: Question ID
+          type: string
+          description: A short name with no spaces, used by "Only show when" and the Google Sheet. Leave empty on new questions and one is made from the question text. Do not change it on existing questions.
+    - name: reviewTitle
+      label: Review step heading
+      type: string
+    - name: reviewIntro
+      label: Review step line under the heading
+      type: string
+    - name: finalQuestion
+      label: Last question on the review step
+      type: string
   - name: footer
-    label: 9. Footer
+    label: 10. Footer
     type: file
     path: data/content/footer.json
     format: json
