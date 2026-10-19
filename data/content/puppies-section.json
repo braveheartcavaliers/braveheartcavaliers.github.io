@@ -4,5 +4,7 @@
   "intro": "Ages update automatically. Select Apply to start an application for a specific puppy.",
   "emptyText": "No puppies are available right now. Apply below and we will contact you when the next litter is ready.",
   "goneTitle": "Recently went home",
-  "priceNote": "Each price includes a $1,000 non-refundable deposit, which reserves your puppy."
+  "priceNote": "Each price includes a $1,000 non-refundable deposit, which reserves your puppy.",
+  "emptyPhoto": "/images/site/blenheim-portrait.jpg",
+  "emptyPhotoAlt": "A Blenheim Cavalier looking up"
 }

@@ -5,6 +5,8 @@
   "disclaimer": "Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.",
   "thankYouTitle": "Thank you for your interest in our Cavalier King Charles Spaniel puppies!",
   "thankYouText": "Please note: Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.",
-  "sentMessage": "We have received your application and emailed a confirmation to {email}. Laura will be in touch soon. If you don't see the email, please check your spam folder.",
-  "fallbackMessage": "We could not send your application automatically. Please copy it and email it to braveheartcavaliers@gmail.com, or text it to Laura at 360-702-2367."
+  "sentMessage": "Thank you! We have received your application and will get back to you within 48 hours. A confirmation has been sent to {email}. If you don't see it, please check your spam folder.",
+  "fallbackMessage": "We could not send your application automatically. Please copy it and email it to braveheartcavaliers@gmail.com, or text it to Laura at 360-702-2367.",
+  "confirmationSubject": "We received your puppy application",
+  "confirmationText": "Thank you for your interest in our Cavalier King Charles Spaniel puppies! We have received your application and will get back to you within 48 hours."
 }

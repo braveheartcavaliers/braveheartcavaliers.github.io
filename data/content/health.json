@@ -54,5 +54,7 @@
     "New places",
     "Scent introduction",
     "Other dogs"
-  ]
+  ],
+  "photo": "/images/site/blenheim-grass.jpg",
+  "photoAlt": "A Blenheim Cavalier sitting in sunlit grass"
 }

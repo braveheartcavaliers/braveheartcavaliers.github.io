@@ -1,0 +1,382 @@
+{
+  "sections": [
+    {
+      "title": "Contact & basic information",
+      "short": "Contact",
+      "intro": "How we can reach you about your application.",
+      "minutes": 2,
+      "questions": [
+        {
+          "label": "Full name",
+          "type": "text",
+          "required": true,
+          "width": "half",
+          "key": "fullName"
+        },
+        {
+          "label": "Phone number",
+          "type": "phone",
+          "required": true,
+          "width": "half",
+          "placeholder": "253-555-0123",
+          "key": "phone"
+        },
+        {
+          "label": "Street address",
+          "type": "text",
+          "required": true,
+          "width": "full",
+          "key": "street"
+        },
+        {
+          "label": "City, state, zip code",
+          "type": "text",
+          "required": true,
+          "width": "half",
+          "placeholder": "Bonney Lake, WA 98391",
+          "key": "cityStateZip"
+        },
+        {
+          "label": "Email address",
+          "type": "email",
+          "required": true,
+          "width": "half",
+          "key": "email"
+        },
+        {
+          "label": "Social media handles",
+          "type": "text",
+          "required": false,
+          "width": "full",
+          "note": "Instagram or Facebook",
+          "placeholder": "@yourhandle",
+          "key": "social"
+        }
+      ]
+    },
+    {
+      "title": "Housing & living environment",
+      "short": "Housing",
+      "intro": "Tell us about the home your puppy will live in.",
+      "minutes": 2,
+      "questions": [
+        {
+          "label": "What type of home do you live in?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Single-family home",
+            "Townhouse",
+            "Apartment / condo",
+            "Other"
+          ],
+          "key": "homeType"
+        },
+        {
+          "label": "Please describe your home",
+          "type": "text",
+          "required": true,
+          "width": "full",
+          "showIf": "homeType = Other",
+          "key": "homeOther"
+        },
+        {
+          "label": "Do you own or rent your home?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Own",
+            "Rent"
+          ],
+          "key": "ownRent"
+        },
+        {
+          "label": "Do you have landlord approval and written permission to own a dog?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "showIf": "ownRent = Rent",
+          "key": "rentPermission"
+        },
+        {
+          "label": "Are there any pet size or breed restrictions?",
+          "type": "text",
+          "required": false,
+          "width": "full",
+          "placeholder": "e.g. dogs under 25 lbs only, or none",
+          "showIf": "ownRent = Rent",
+          "key": "rentRestrictions"
+        },
+        {
+          "label": "Do you have a fenced yard?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "key": "fenced"
+        },
+        {
+          "label": "Fence height and type",
+          "type": "text",
+          "required": true,
+          "width": "full",
+          "placeholder": "e.g. 5 ft wood privacy fence",
+          "showIf": "fenced = Yes",
+          "key": "fenceDetails"
+        },
+        {
+          "label": "How do you plan to handle potty breaks and daily exercise safely?",
+          "type": "textarea",
+          "required": true,
+          "width": "full",
+          "showIf": "fenced = No",
+          "key": "noFencePlan"
+        }
+      ]
+    },
+    {
+      "title": "Family & lifestyle",
+      "short": "Family",
+      "intro": "Who your puppy will share daily life with.",
+      "minutes": 1,
+      "questions": [
+        {
+          "label": "Adults in the household",
+          "type": "number",
+          "required": true,
+          "width": "half",
+          "key": "adults",
+          "min": 1,
+          "max": 20
+        },
+        {
+          "label": "Children in the household",
+          "type": "number",
+          "required": true,
+          "width": "half",
+          "key": "childCount",
+          "min": 0,
+          "max": 20
+        },
+        {
+          "label": "Children's ages",
+          "type": "text",
+          "required": true,
+          "width": "full",
+          "placeholder": "e.g. 6 and 9",
+          "showIf": "childCount > 0",
+          "key": "childAges"
+        },
+        {
+          "label": "Are your children used to handling small, delicate dogs respectfully?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "Still learning",
+            "No"
+          ],
+          "showIf": "childCount > 0",
+          "key": "childHandling"
+        },
+        {
+          "label": "Does anyone in the household have known dog allergies?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "key": "allergies"
+        },
+        {
+          "label": "On average, how many hours a day will the puppy be left alone?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Less than 2",
+            "2 to 4",
+            "4 to 6",
+            "More than 6"
+          ],
+          "key": "hoursAlone"
+        }
+      ]
+    },
+    {
+      "title": "Pet ownership & experience",
+      "short": "Experience",
+      "intro": "There are no wrong answers. First-time owners are welcome.",
+      "minutes": 2,
+      "questions": [
+        {
+          "label": "Do you currently have any other pets?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "key": "hasPets"
+        },
+        {
+          "label": "Please list species, breed, age, sex, and whether they are spayed or neutered",
+          "type": "textarea",
+          "required": true,
+          "width": "full",
+          "placeholder": "e.g. Cat, domestic shorthair, 4 years, female, spayed",
+          "showIf": "hasPets = Yes",
+          "key": "otherPets"
+        },
+        {
+          "label": "Have you owned dogs before?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "No, this would be my first dog",
+            "Yes, other breeds",
+            "Yes, including a Cavalier King Charles Spaniel"
+          ],
+          "key": "dogExperience"
+        },
+        {
+          "label": "Where are your past dogs now?",
+          "type": "textarea",
+          "required": true,
+          "width": "full",
+          "note": "e.g. passed away of old age, rehomed",
+          "showIf": "dogExperience != No, this would be my first dog",
+          "key": "pastDogs"
+        },
+        {
+          "label": "Do you have an established veterinarian?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "Not yet"
+          ],
+          "key": "vet"
+        }
+      ]
+    },
+    {
+      "title": "Puppy preferences",
+      "short": "Preferences",
+      "intro": "Colors vary depending on the parent dogs.",
+      "minutes": 2,
+      "questions": [
+        {
+          "label": "Puppy you are applying for",
+          "type": "puppy",
+          "required": false,
+          "width": "full",
+          "key": "puppy"
+        },
+        {
+          "label": "Color preference",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Blenheim",
+            "Tri-color",
+            "Open to either"
+          ],
+          "key": "colour"
+        },
+        {
+          "label": "Gender preference",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Male",
+            "Female",
+            "No preference"
+          ],
+          "key": "gender"
+        },
+        {
+          "label": "What is the primary purpose for your puppy?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Family companion / pet",
+            "Show / conformation prospect",
+            "Performance / sports (agility, obedience, therapy)"
+          ],
+          "key": "purpose"
+        },
+        {
+          "label": "What temperament or energy level are you looking for?",
+          "type": "textarea",
+          "required": false,
+          "width": "full",
+          "note": "e.g. calm and cuddly, active and outgoing",
+          "key": "temperament"
+        },
+        {
+          "label": "If a puppy of your preferred color or gender is not available in the upcoming litter, are you willing to wait for a future litter?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "key": "waitLitter"
+        }
+      ]
+    },
+    {
+      "title": "Breed commitment & agreement",
+      "short": "Agreement",
+      "intro": "Cavaliers are highly human-centric companions that thrive on closeness and do not do well with isolation.",
+      "minutes": 1,
+      "questions": [
+        {
+          "label": "Are you ready to provide daily affection and attention?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "key": "dailyCare"
+        },
+        {
+          "label": "Are you willing to sign a formal Sales Contract that includes a \"Return to Breeder\" clause, promising the dog will be returned to us if you can no longer keep it, so it never goes to a shelter?",
+          "type": "choice",
+          "required": true,
+          "width": "full",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "key": "returnContract"
+        }
+      ]
+    }
+  ],
+  "reviewTitle": "Review your application",
+  "reviewIntro": "Check your answers. Select Edit to change a section.",
+  "finalQuestion": "Anything else you would like us to know?"
+}
