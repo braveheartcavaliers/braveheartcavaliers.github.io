@@ -22,6 +22,16 @@ media:
   - jpeg
   - png
   - webp
+- name: gallery
+  label: Gallery photos
+  input: images/gallery
+  output: /images/gallery
+  rename: safe
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
 content:
 - name: puppies
   label: Puppies
@@ -107,6 +117,24 @@ content:
     label: Review
     type: text
     required: true
+- name: gallery
+  label: Gallery
+  type: file
+  path: data/gallery.json
+  format: json
+  list: true
+  description: Photos shown when visitors open "Gallery" from the menu. Drag to change the order.
+  fields:
+  - name: photo
+    label: Photo
+    type: image
+    required: true
+    options:
+      media: gallery
+  - name: caption
+    label: Caption (optional)
+    type: string
+    description: Shown when someone hovers over or opens the photo.
 - name: website-text
   label: Website text
   type: group
@@ -427,6 +455,10 @@ content:
     - name: intro
       label: Introduction
       type: text
+    - name: privacyNote
+      label: Privacy note
+      type: text
+      description: Shown beside the form and above the Submit button.
     - name: disclaimer
       label: Note beside the form
       type: text
@@ -559,8 +591,23 @@ content:
     - name: finalQuestion
       label: Last question on the review step
       type: string
+  - name: gallery-section
+    label: 10. Gallery (heading)
+    type: file
+    path: data/content/gallery-section.json
+    format: json
+    fields:
+    - name: eyebrow
+      label: Small label above the heading
+      type: string
+    - name: title
+      label: Heading
+      type: string
+    - name: intro
+      label: Line under the heading
+      type: string
   - name: footer
-    label: 10. Footer
+    label: 11. Footer
     type: file
     path: data/content/footer.json
     format: json

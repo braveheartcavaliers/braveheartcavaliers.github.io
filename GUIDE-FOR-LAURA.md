@@ -25,6 +25,14 @@ Change **Status** to **Went home** and save. The puppy leaves the "Available pup
 
 To remove a puppy completely, delete it from the list instead.
 
+## Add photos to the Gallery
+
+The Gallery opens only when someone taps **Gallery** in the menu, so it never crowds the main page.
+
+1. Open **Gallery** and tap **Add**.
+2. Choose or upload a photo, and add a short caption if you like.
+3. Tap **Save**. Drag photos to change their order, or delete one to remove it.
+
 ## Photo tips
 
 - Bright daylight, puppy at eye level, plain background.
@@ -49,7 +57,8 @@ Open **Website text** in the menu. Each item is one section of the website, in t
 7. Contact (phone numbers and email)
 8. Application (thank-you message and the confirmation email applicants receive)
 9. Application questions
-10. Footer
+10. Gallery (the heading at the top of the gallery)
+11. Footer
 
 Change the text, tap **Save**, and the website updates in 1 to 2 minutes. To start a new paragraph in a longer text, leave an empty line.
 

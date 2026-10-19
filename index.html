@@ -274,6 +274,33 @@ textarea{min-height:96px;resize:vertical}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.pup,.pup:hover{transform:none}.wiz fieldset.in-right,.wiz fieldset.in-left,.wiz fieldset.shake{animation:none}}
 
+/* gallery (opened only from the menu) */
+dialog.gallery{border:0;padding:0;margin:0;width:100%;max-width:none;height:100%;max-height:none;background:var(--paper);color:var(--ink);overflow:auto}
+dialog.gallery::backdrop{background:rgba(29,35,32,.5)}
+dialog.gallery[open]{animation:galIn .3s ease}
+@keyframes galIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.gal-head{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:24px max(16px,calc((100% - 1120px)/2)) 18px;background:rgba(247,245,239,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.gal-head h2{margin:0;font-size:clamp(28px,4vw,40px)}
+.gal-head .eyebrow{margin:0 0 4px}
+.gal-intro{margin:6px 0 0;color:var(--mute)}
+.gal-close{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);background:#fff;font-size:18px;cursor:pointer;color:var(--ink)}
+.gal-close:hover{border-color:var(--moss)}
+.gal-grid{columns:3 280px;column-gap:14px;padding:22px max(16px,calc((100% - 1120px)/2)) 48px}
+.gal-grid button{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:none;cursor:zoom-in;border-radius:12px;overflow:hidden;break-inside:avoid;position:relative}
+.gal-grid img{display:block;width:100%;height:auto;transition:transform .4s ease}
+.gal-grid button:hover img{transform:scale(1.03)}
+.gal-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;color:#fff;font-size:13px;text-align:left;background:linear-gradient(transparent,rgba(0,0,0,.55));opacity:0;transition:opacity .25s}
+.gal-grid button:hover figcaption,.gal-grid button:focus-visible figcaption{opacity:1}
+.gal-empty{text-align:center;color:var(--mute);padding:60px 16px}
+@media (prefers-reduced-motion:reduce){dialog.gallery[open]{animation:none}.gal-grid img{transition:none}}
+@media (max-width:820px){header.top nav a.lnk.gal-link{display:inline-block}}
+.privacy{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--moss-dark);background:var(--moss-soft);border-radius:10px;padding:10px 12px;margin:14px 6px 0}
+.privacy svg{flex:none;width:18px;height:18px;fill:var(--moss);margin-top:1px}
+.side .privacy + .disclaimer{margin-top:12px}
+.inline-privacy{grid-column:1/-1;margin:4px 0 0}
+.foot a.mail{display:inline;margin:0;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:3px}
+.foot a.mail:hover{text-decoration-color:#fff}
+
 /* lightbox */
 dialog.lb{border:0;padding:0;background:#111;color:#fff;border-radius:12px;max-width:min(960px,calc(100% - 24px))}
 dialog.lb::backdrop{background:rgba(0,0,0,.85)}
@@ -358,7 +385,7 @@ section .eyebrow{margin-bottom:8px}
   <header class="top">
     <a class="brand" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>Brave Heart</a>
     <nav aria-label="Sections">
-      <a class="lnk" href="#puppies">Puppies</a><a class="lnk" href="#about">About</a><a class="lnk" href="#health">Health</a><a class="lnk" href="#process">Process</a><a class="lnk" href="#reviews">Reviews</a><a class="lnk" href="#contact">Contact</a>
+      <a class="lnk" href="#puppies">Puppies</a><a class="lnk" href="#about">About</a><a class="lnk" href="#health">Health</a><a class="lnk" href="#process">Process</a><a class="lnk" href="#reviews">Reviews</a><a class="lnk" href="#contact">Contact</a><a class="lnk gal-link" href="#gallery" data-gallery>Gallery</a>
       <a class="cta-sm" href="#apply">Apply</a>
     </nav>
   </header>
@@ -526,6 +553,7 @@ section .eyebrow{margin-bottom:8px}
         <h3>Your application</h3>
         <ol id="sideNav"></ol>
         <p class="time" id="timeLeft"></p>
+        <p class="privacy" id="privacySide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3zm0 10.9h6c-.5 3.9-3 7.2-6 8.4v-8.4H6V6.3l6-2.2v8.8z"/></svg><span data-c="application.privacyNote">Your information is kept private. We use it only to review your application and to get back to you about a puppy. We never sell or share it, and we will never use it for advertising, marketing, or any other purpose.</span></p>
         <p class="disclaimer" data-c="application.disclaimer">Completing this application does not guarantee a placement or obligate you to purchase a puppy. It helps us match the right puppy with the right family and ensures our dogs go to safe, loving forever homes.</p>
       </aside>
 
@@ -538,6 +566,7 @@ section .eyebrow{margin-bottom:8px}
             <p class="intro-line" id="reviewIntro">Check your answers. Select Edit to change a section.</p>
             <div class="summary" id="wizSummary"></div>
             <label class="f full" id="finalLabel">Anything else you would like us to know? <span class="opt-note">Optional</span><textarea name="message" maxlength="1500"></textarea></label>
+            <p class="privacy inline-privacy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3zm0 10.9h6c-.5 3.9-3 7.2-6 8.4v-8.4H6V6.3l6-2.2v8.8z"/></svg><span data-c="application.privacyNote">Your information is kept private. We use it only to review your application and to get back to you about a puppy. We never sell or share it, and we will never use it for advertising, marketing, or any other purpose.</span></p>
             <div class="hp" aria-hidden="true"><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></div>
           </fieldset>
 
@@ -581,18 +610,27 @@ section .eyebrow{margin-bottom:8px}
       <div id="footContacts" data-list>
       <p>Eugene · 206-255-2007<br>Calls and texts</p>
       <p>Laura · 360-702-2367<br>Texts only</p>
-      <p>braveheartcavaliers@gmail.com</p>
+      <p><a class="mail" href="mailto:braveheartcavaliers@gmail.com">braveheartcavaliers@gmail.com</a></p>
       </div>
     </div>
     <div>
       <h4>Explore</h4>
-      <a href="#puppies">Available puppies</a><a href="#about">Meet the breeder</a><a href="#health">Health</a><a href="#reviews">Reviews</a><a href="#apply">Apply for a puppy</a>
+      <a href="#puppies">Available puppies</a><a href="#about">Meet the breeder</a><a href="#health">Health</a><a href="#reviews">Reviews</a><a href="#gallery" data-gallery>Gallery</a><a href="#apply">Apply for a puppy</a>
     </div>
     <p class="copy-line"><span data-c="footer.bottomLine">© 2026 Brave Heart · AKC member</span> · <a href="https://www.gooddog.com/breeders/brave-heart-washington" target="_blank" rel="noopener">Good Dog certified breeder</a></p>
   </footer>
 </div>
 
 <nav class="mcta" id="mcta" aria-label="Quick actions"><a href="#puppies">Puppies</a><a class="go" href="#apply">Apply for a puppy</a></nav>
+
+<dialog class="gallery" id="gallery" aria-labelledby="galTitle">
+  <div class="gal-head">
+    <div><p class="eyebrow" data-c="gallery-section.eyebrow">Gallery</p><h2 id="galTitle" data-c="gallery-section.title">Life at Brave Heart</h2><p class="gal-intro" data-c="gallery-section.intro">Our dogs at home, in the field, and in the show ring.</p></div>
+    <button type="button" class="gal-close" id="galClose" aria-label="Close gallery">✕</button>
+  </div>
+  <div class="gal-grid" id="galGrid"></div>
+  <p class="gal-empty" id="galEmpty" hidden>Photos are coming soon.</p>
+</dialog>
 
 <dialog class="lb" id="lb" aria-label="Photo viewer">
   <div class="lb-inner">
@@ -614,7 +652,7 @@ section .eyebrow{margin-bottom:8px}
 let PUPPIES = [], REVIEWS = [], SETTINGS = {}, CONTENT = {};
 document.documentElement.classList.add('cms-loading');
 setTimeout(() => document.documentElement.classList.remove('cms-loading'), 2500); // never hide text for long
-const CONTENT_FILES = ['home', 'puppies-section', 'about', 'health', 'process', 'reviews-section', 'contact', 'application', 'form', 'footer'];
+const CONTENT_FILES = ['home', 'gallery-section', 'puppies-section', 'about', 'health', 'process', 'reviews-section', 'contact', 'application', 'form', 'footer'];
 const contentValue = path => path.split('.').reduce((o, k) => (o && typeof o === 'object') ? o[k] : undefined, CONTENT);
 const txt = (path, fallback) => { const v = contentValue(path); return (typeof v === 'string' && v.trim()) ? v.trim() : fallback; };
 const list = path => { const v = contentValue(path); return Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '') : null; };
@@ -670,7 +708,7 @@ function applyContent(){
   const cards = list('contact.cards');
   if (cards) {
     $('contactCards').innerHTML = cards.filter(c => c && c.value).map(c => `<div class="ccard"><span class="who">${esc(c.who || '')}</span><span class="num">${esc(c.value)}</span><span class="how">${esc(c.how || '')}</span><button class="copy" type="button" data-copy="${esc(c.value)}">${/@/.test(c.value) ? 'Copy email' : 'Copy number'}</button></div>`).join('');
-    $('footContacts').innerHTML = cards.filter(c => c && c.value).map(c => `<p>${c.who && !/@/.test(c.value) ? esc(c.who) + ' · ' : ''}${esc(c.value)}${c.how && !/@/.test(c.value) ? '<br>' + esc(c.how) : ''}</p>`).join('');
+    $('footContacts').innerHTML = cards.filter(c => c && c.value).map(c => { const v = String(c.value).trim(), mail = /@/.test(v); const link = mail ? `<a class="mail" href="mailto:${esc(v)}">${esc(v)}</a>` : `<a class="mail" href="tel:${esc(v.replace(/[^\d+]/g, ''))}">${esc(v)}</a>`; return `<p>${c.who && !mail ? esc(c.who) + ' · ' : ''}${link}${c.how && !mail ? '<br>' + esc(c.how) : ''}</p>`; }).join('');
   }
   observeCounts();
 }
@@ -706,6 +744,22 @@ $('heroPhoto').addEventListener('click', () => openLb([{ url: $('heroImg').getAt
 $('lbPrev').onclick = () => lbStep(-1); $('lbNext').onclick = () => lbStep(1); $('lbClose').onclick = () => $('lb').close();
 $('lb').addEventListener('keydown', e => { if (e.key === 'ArrowLeft') lbStep(-1); if (e.key === 'ArrowRight') lbStep(1); });
 $('lb').addEventListener('click', e => { if (e.target === $('lb')) $('lb').close(); });
+
+/* ---------- gallery ---------- */
+let GALLERY = [];
+function renderGallery(){
+  const items = GALLERY.filter(g => g && g.photo).map(g => ({ url: String(g.photo).trim().replace(/^\/+/, ''), caption: String(g.caption || '').trim() }));
+  $('galGrid').innerHTML = items.map((g, i) => `<button type="button" data-gi="${i}"><img src="${esc(g.url)}" alt="${esc(g.caption || 'Brave Heart Cavalier')}" loading="lazy">${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ''}</button>`).join('');
+  $('galEmpty').hidden = items.length > 0;
+  renderGallery.items = items;
+}
+function openGallery(){ if (!$('gallery').open) { $('gallery').showModal(); $('gallery').scrollTop = 0; } if (location.hash !== '#gallery') history.pushState(null, '', '#gallery'); }
+function closeGallery(){ if ($('gallery').open) $('gallery').close(); }
+document.addEventListener('click', e => { const a = e.target.closest('[data-gallery]'); if (a) { e.preventDefault(); openGallery(); } });
+$('galClose').addEventListener('click', closeGallery);
+$('gallery').addEventListener('close', () => { if (location.hash === '#gallery') history.pushState(null, '', location.pathname + location.search); });
+$('galGrid').addEventListener('click', e => { const b = e.target.closest('[data-gi]'); if (b) openLb(renderGallery.items.map(g => ({ url: g.url, caption: g.caption || 'Brave Heart Cavaliers' })), +b.dataset.gi); });
+addEventListener('popstate', () => { if (location.hash === '#gallery') openGallery(); else closeGallery(); });
 
 /* ---------- puppies ---------- */
 const photoUrl = p => String(p || '').trim().replace(/^\/+/, '');
@@ -1227,7 +1281,9 @@ async function getJSON(path, fallback){
   try { applyContent(); } catch (err) { console.error(err); }
   try { const f = normalizeForm(CONTENT.form); if (f) buildForm(f); } catch (err) { console.error(err); }
   document.documentElement.classList.remove('cms-loading');
-  [PUPPIES, REVIEWS, SETTINGS] = await Promise.all([getJSON('data/puppies.json', []), getJSON('data/reviews.json', []), getJSON('data/settings.json', {})]);
+  [PUPPIES, REVIEWS, SETTINGS, GALLERY] = await Promise.all([getJSON('data/puppies.json', []), getJSON('data/reviews.json', []), getJSON('data/settings.json', {}), getJSON('data/gallery.json', [])]);
+  GALLERY = Array.isArray(GALLERY) ? GALLERY : []; renderGallery();
+  if (location.hash === '#gallery') openGallery();
   if (!Array.isArray(PUPPIES)) PUPPIES = [];
   REVIEWS = Array.isArray(REVIEWS) ? REVIEWS.filter(r => r && r.text) : [];
   if (!SETTINGS || typeof SETTINGS !== 'object') SETTINGS = {};
