@@ -1,0 +1,134 @@
+# "Free up space": clears the repository's old history (old and deleted photos)
+# while keeping every current file exactly as it is.
+#
+# How to run: Actions tab > Free up space > Run workflow.
+#   - "Check only" tests everything and changes nothing.
+#   - "Free up space" does the cleanup. Type FREE UP SPACE in the confirmation box.
+#
+# Safety checks, in order. If any check fails, nothing is changed.
+#   1. The website's core files are present and every data file is valid.
+#   2. A full backup of the current files is saved (Actions > this run > Artifacts, kept 90 days).
+#   3. The new, history-free version is compared with the current one; every file must be identical.
+#   4. The cleanup is cancelled if anyone saved a change in the meantime (for example in Pages CMS).
+name: Free up space
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: What to do
+        type: choice
+        default: Check only
+        options:
+          - Check only
+          - Free up space
+      confirm:
+        description: To free up space, type FREE UP SPACE here
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: free-up-space
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the current website files
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Show the current size
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          kb=$(gh api "repos/${{ github.repository }}" --jq .size)
+          echo "Repository size now: $((kb / 1024)) MB (recommended limit: about 1000 MB)"
+          echo "### Size before: $((kb / 1024)) MB" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "Check 1: core website files are present and valid"
+        run: |
+          set -e
+          missing=0
+          for f in index.html .pages.yml .github/workflows/deploy.yml .github/workflows/free-up-space.yml \
+                   scripts/build.mjs data/puppies.json data/reviews.json data/settings.json apps-script/Code.gs; do
+            if [ ! -s "$f" ]; then echo "MISSING or empty: $f"; missing=1; fi
+          done
+          [ -d data/content ] || { echo "MISSING: data/content"; missing=1; }
+          [ "$missing" = 0 ] || { echo "Stopping: core files are missing. Nothing was changed."; exit 1; }
+          node -e '
+            const fs = require("fs"), path = require("path");
+            const files = ["data/puppies.json","data/reviews.json","data/settings.json"]
+              .concat(fs.readdirSync("data").filter(f => f.endsWith(".json")).map(f => "data/" + f))
+              .concat(fs.readdirSync("data/content").filter(f => f.endsWith(".json")).map(f => path.join("data/content", f)));
+            let bad = 0;
+            for (const f of new Set(files)) { try { JSON.parse(fs.readFileSync(f, "utf8")); } catch (e) { console.log("INVALID:", f, e.message); bad = 1; } }
+            if (bad) { console.log("Stopping: a data file is broken. Nothing was changed."); process.exit(1); }
+            console.log("All data files are valid.");'
+          echo "Core files present: $(git ls-files | wc -l) files in total."
+
+      - name: "Check 2: save a backup of all current files"
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-backup-${{ github.run_number }}
+          path: |
+            .
+            !.git
+          include-hidden-files: true
+          retention-days: 90
+
+      - name: "Check 3: build the history-free version and compare every file"
+        id: fresh
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          old_commit=$(git rev-parse HEAD)
+          old_tree=$(git rev-parse 'HEAD^{tree}')
+          git checkout --orphan fresh-start
+          git commit --quiet -m "Fresh start: history cleared to free up space (website files unchanged)"
+          new_tree=$(git rev-parse 'HEAD^{tree}')
+          if [ "$old_tree" != "$new_tree" ]; then
+            echo "Stopping: the new version is not identical to the current website. Nothing was changed."
+            exit 1
+          fi
+          echo "Identical: every file matches the current website exactly."
+          echo "old_commit=$old_commit" >> "$GITHUB_OUTPUT"
+
+      - name: Stop here in "Check only" mode (after a test upload to a temporary branch)
+        if: ${{ inputs.mode != 'Free up space' }}
+        run: |
+          set -e
+          git push --force origin fresh-start:refs/heads/space-check-temp
+          git push origin --delete space-check-temp
+          echo "Check only: all checks passed, including a test upload. The website was not changed."
+          echo "### Check only: all checks passed, nothing was changed." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Confirm
+        if: ${{ inputs.mode == 'Free up space' && inputs.confirm != 'FREE UP SPACE' }}
+        run: |
+          echo "Stopping: to free up space, type FREE UP SPACE in the confirmation box. Nothing was changed."
+          exit 1
+
+      - name: "Check 4 and cleanup: replace the history (cancelled if anything changed meanwhile)"
+        if: ${{ inputs.mode == 'Free up space' && inputs.confirm == 'FREE UP SPACE' }}
+        run: |
+          set -e
+          # --force-with-lease refuses if main moved since this run started (e.g. a Pages CMS save).
+          git push --force-with-lease="main:${{ steps.fresh.outputs.old_commit }}" origin fresh-start:main
+          echo "Done. Old history removed; website files unchanged."
+          echo "### Done: old history removed, website files unchanged." >> "$GITHUB_STEP_SUMMARY"
+          echo "GitHub can take a few days to show the smaller size." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Republish the website
+        if: ${{ inputs.mode == 'Free up space' && inputs.confirm == 'FREE UP SPACE' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main --repo "${{ github.repository }}"
