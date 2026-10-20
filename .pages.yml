@@ -440,6 +440,27 @@ content:
       - name: how
         label: Note (for example "Text messages only")
         type: string
+    - name: socialTitle
+      label: Social media heading
+      type: string
+    - name: social
+      label: Social media links
+      type: object
+      list: true
+      description: Shown under the contact cards and in the footer. Remove all to hide them.
+      fields:
+      - name: name
+        label: Site (for example "Instagram")
+        type: string
+        required: true
+      - name: label
+        label: Short text (for example your @handle)
+        type: string
+      - name: url
+        label: Link
+        type: string
+        required: true
+        description: Paste the full address, starting with https://
   - name: application
     label: 8. Application (messages and emails)
     type: file

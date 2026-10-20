@@ -172,6 +172,15 @@ button.ph{cursor:zoom-in}
 .ccard .who{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--mute)}
 .ccard .num{font-family:'Newsreader',serif;font-size:24px;line-height:1.25;user-select:all;overflow-wrap:anywhere}
 .ccard .how{font-size:14px;color:var(--mute)}
+.social{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:18px}
+.social[hidden]{display:none}
+.social-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--mute);margin-right:6px}
+.social a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--rule);border-radius:999px;background:var(--card);color:var(--ink);text-decoration:none;font-size:14px;transition:border-color .2s,background .2s}
+.social a:hover{border-color:var(--moss);background:var(--moss-soft)}
+.social a span{color:var(--mute)}
+.social .ext{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--mute)}
+.foot-social{margin-top:14px}
+.foot-social[hidden]{display:none}
 .copy{justify-self:start;margin-top:8px;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:6px 12px;font:600 13px 'Figtree',sans-serif;cursor:pointer;color:var(--moss)}
 .copy:hover{border-color:var(--moss)}
 
@@ -540,6 +549,11 @@ section .eyebrow{margin-bottom:8px}
       <div class="ccard"><span class="who">Laura</span><span class="num">360-702-2367</span><span class="how">Text messages only</span><button class="copy" type="button" data-copy="360-702-2367">Copy number</button></div>
       <div class="ccard"><span class="who">Email</span><span class="num">braveheartcavaliers@gmail.com</span><span class="how">Applications and questions</span><button class="copy" type="button" data-copy="braveheartcavaliers@gmail.com">Copy email</button></div>
     </div>
+    <div class="social reveal" id="socialRow" data-list>
+      <span class="social-title" data-c="contact.socialTitle">Follow along</span>
+      <a href="https://www.facebook.com/share/1BS3om3SuC/" target="_blank" rel="noopener"><b>Facebook</b><span>Photos and updates</span><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+      <a href="https://www.instagram.com/_laura_tsekhmister_/" target="_blank" rel="noopener"><b>Instagram</b><span>@_laura_tsekhmister_</span><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+    </div>
   </section>
 
   <section id="apply" aria-labelledby="applyTitle">
@@ -612,6 +626,7 @@ section .eyebrow{margin-bottom:8px}
       <p>Laura · 360-702-2367<br>Texts only</p>
       <p><a class="mail" href="mailto:braveheartcavaliers@gmail.com">braveheartcavaliers@gmail.com</a></p>
       </div>
+      <p class="foot-social" id="footSocial" data-list><a class="mail" href="https://www.facebook.com/share/1BS3om3SuC/" target="_blank" rel="noopener">Facebook</a> · <a class="mail" href="https://www.instagram.com/_laura_tsekhmister_/" target="_blank" rel="noopener">Instagram</a></p>
     </div>
     <div>
       <h4>Explore</h4>
@@ -708,6 +723,14 @@ function applyContent(){
   const cards = list('contact.cards');
   if (cards) {
     $('contactCards').innerHTML = cards.filter(c => c && c.value).map(c => `<div class="ccard"><span class="who">${esc(c.who || '')}</span><span class="num">${esc(c.value)}</span><span class="how">${esc(c.how || '')}</span><button class="copy" type="button" data-copy="${esc(c.value)}">${/@/.test(c.value) ? 'Copy email' : 'Copy number'}</button></div>`).join('');
+    const social = (list('contact.social') || []).filter(x => x && /^https?:\/\//.test(String(x.url || '').trim()));
+    if (list('contact.social')) {
+      const ext = $('socialRow').querySelector('.ext') ? $('socialRow').querySelector('.ext').outerHTML : '';
+      $('socialRow').innerHTML = `<span class="social-title">${esc(txt('contact.socialTitle', 'Follow along'))}</span>` + social.map(x => `<a href="${esc(String(x.url).trim())}" target="_blank" rel="noopener"><b>${esc(x.name || 'Link')}</b>${x.label ? `<span>${esc(x.label)}</span>` : ''}${ext}</a>`).join('');
+      $('socialRow').hidden = !social.length;
+      $('footSocial').innerHTML = social.map(x => `<a class="mail" href="${esc(String(x.url).trim())}" target="_blank" rel="noopener">${esc(x.name || 'Link')}</a>`).join(' · ');
+      $('footSocial').hidden = !social.length;
+    }
     $('footContacts').innerHTML = cards.filter(c => c && c.value).map(c => { const v = String(c.value).trim(), mail = /@/.test(v); const link = mail ? `<a class="mail" href="mailto:${esc(v)}">${esc(v)}</a>` : `<a class="mail" href="tel:${esc(v.replace(/[^\d+]/g, ''))}">${esc(v)}</a>`; return `<p>${c.who && !mail ? esc(c.who) + ' · ' : ''}${link}${c.how && !mail ? '<br>' + esc(c.how) : ''}</p>`; }).join('');
   }
   observeCounts();
