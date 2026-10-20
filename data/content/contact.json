@@ -18,5 +18,18 @@
       "value": "braveheartcavaliers@gmail.com",
       "how": "Applications and questions"
     }
+  ],
+  "socialTitle": "Follow along",
+  "social": [
+    {
+      "name": "Facebook",
+      "label": "Photos and updates",
+      "url": "https://www.facebook.com/share/1BS3om3SuC/"
+    },
+    {
+      "name": "Instagram",
+      "label": "@_laura_tsekhmister_",
+      "url": "https://www.instagram.com/_laura_tsekhmister_/"
+    }
   ]
 }
