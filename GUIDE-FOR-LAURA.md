@@ -82,6 +82,20 @@ When someone applies:
 - they get a confirmation email with a copy of their answers, saying we will get back to them **within 48 hours**. You can change this wording in **8. Application**.
 - the application is added to the **Brave Heart Applications** Google Sheet. Use the **Status** column to track each family (New, Contacted, Approved, Declined).
 
+## If GitHub says the website is running out of space
+
+Photos you upload are kept in the website's history, even after you delete them. After a few years this can add up. GitHub may then email the Brave Heart account. Nothing stops working; you just clear the old history once:
+
+1. Sign in to github.com as **braveheartcavaliers** and open the website's repository.
+2. In Pages CMS, first delete any photos you no longer want (for example, puppies that went home long ago).
+3. On GitHub, open the **Actions** tab and choose **Free up space** on the left.
+4. Click **Run workflow**. Change **What to do** to **Free up space**, type **FREE UP SPACE** in the box, and click **Run workflow** again.
+5. Wait about a minute until the run shows a green check mark.
+
+Your website, puppies, reviews, photos and text stay exactly the same. The tool checks that every file is identical before changing anything, saves a backup first, and stops by itself if anything looks wrong. GitHub can take a few days to show the smaller size.
+
+To test it without changing anything, leave **What to do** on **Check only**.
+
 ## Something looks wrong?
 
 Wait 2 minutes and refresh. If it is still wrong, message Sviatlana.
