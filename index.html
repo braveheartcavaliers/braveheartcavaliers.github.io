@@ -283,6 +283,56 @@ textarea{min-height:96px;resize:vertical}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.pup,.pup:hover{transform:none}.wiz fieldset.in-right,.wiz fieldset.in-left,.wiz fieldset.shake{animation:none}}
 
+
+/* ===== motion & effects (all switched off for "reduce motion") ===== */
+.scroll-bar{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--moss),#7a9a6a 60%,var(--rust));z-index:20;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){
+  /* hero entrance */
+  .js .intro > div > *{opacity:0;transform:translateY(18px)}
+  .js.hero-in .intro > div > *{opacity:1;transform:none;transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 110ms + 80ms)}
+  .js .intro h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+  .js .intro h1 .w > span{display:inline-block;transform:translateY(105%)}
+  .js.hero-in .intro h1 .w > span{transform:none;transition:transform 1s cubic-bezier(.2,.75,.15,1);transition-delay:calc(var(--w,0) * 70ms + 200ms)}
+  .js .photo{clip-path:inset(100% 0 0 0 round 10px)}
+  .js.hero-in .photo{clip-path:inset(0 0 0 0 round 10px);transition:clip-path 1.3s cubic-bezier(.65,0,.2,1) .15s}
+  .js .photo img{transform:scale(1.18);will-change:transform}
+  .js.hero-in .photo img{transform:scale(1.04) translateY(var(--py,0px));transition:transform 1.8s cubic-bezier(.2,.7,.2,1) .15s}
+  .js.hero-in.hero-done .photo img{transition:none}
+  .photo:hover img{filter:saturate(1.08)}
+  /* brand heartbeat */
+  .brand:hover svg,.js.hero-in header .brand svg{animation:beat 1.1s ease 1}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}60%{transform:scale(1)}}
+  /* images fade in softly once loaded */
+  .js img.fx-img{opacity:0;filter:blur(10px);transform:scale(1.04);transition:opacity .9s ease,filter .9s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .js img.fx-img.loaded{opacity:1;filter:none;transform:none}
+  /* staggered children inside revealed blocks */
+  .js .fx-kids > *{opacity:0;transform:translateY(16px)}
+  .js .reveal.in .fx-kids > *,.js .fx-kids.reveal.in > *{opacity:1;transform:none;transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 90ms)}
+  /* section eyebrows draw a short line in */
+  .js section .reveal .eyebrow::before{content:"";display:inline-block;vertical-align:middle;height:2px;width:0;background:var(--rust);margin-right:0;transition:width .7s cubic-bezier(.2,.7,.2,1) .15s,margin .7s ease .15s}
+  .js section .reveal.in .eyebrow::before{width:22px;margin-right:10px}
+  /* About photos: wipe in, second photo floats */
+  .js .about-photos .ph-main{clip-path:inset(0 100% 0 0 round 14px)}
+  .js .reveal.in .about-photos .ph-main{clip-path:inset(0 0 0 0 round 14px);transition:clip-path 1.2s cubic-bezier(.65,0,.2,1)}
+  .js .about-photos .ph-second{opacity:0;transform:translateY(40px) rotate(2deg)}
+  .js .reveal.in .about-photos .ph-second{opacity:1;transform:translateY(var(--float,0px)) rotate(0);transition:opacity .9s ease .5s,transform 1.1s cubic-bezier(.2,.7,.2,1) .5s}
+  .js.fx-scrolling .reveal.in .about-photos .ph-second{transition:opacity .9s ease .5s}
+  /* raised panel photo and empty-state photo zoom out gently */
+  .js .raised-ph img{transform:scale(1.12);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in .raised-ph img{transform:none}
+  /* buttons: soft shine on hover */
+  .btn,.primary,.cta-sm{position:relative;overflow:hidden}
+  .btn::after,.primary::after,.cta-sm::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+  .btn:hover::after,.primary:hover::after,.cta-sm:hover::after{transform:translateX(120%);transition:transform .8s ease}
+  .btn.line::after{background:linear-gradient(110deg,transparent 30%,rgba(51,83,58,.12) 50%,transparent 70%)}
+  /* cards lift */
+  .ccard,.dog,.panel{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+  .ccard:hover,.dog:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(29,35,32,.08)}
+  /* gallery: photos cascade in when opened */
+  dialog.gallery[open] .gal-grid button{animation:galItem .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 55ms + 120ms)}
+  @keyframes galItem{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+}
+
 /* gallery (opened only from the menu) */
 dialog.gallery{border:0;padding:0;margin:0;width:100%;max-width:none;height:100%;max-height:none;background:var(--paper);color:var(--ink);overflow:auto}
 dialog.gallery::backdrop{background:rgba(29,35,32,.5)}
@@ -389,6 +439,7 @@ section .eyebrow{margin-bottom:8px}
 </style>
 </head>
 <body>
+<div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
 
 <div class="wrap">
   <header class="top">
@@ -410,7 +461,7 @@ section .eyebrow{margin-bottom:8px}
     <button class="photo" type="button" id="heroPhoto" aria-label="View photo full size"><img id="heroImg" src="images/site/photo.jpg" alt="Laura walking four Cavalier King Charles Spaniels across a mountain meadow"></button>
   </div>
 
-  <div class="stats reveal" id="stats" data-list aria-label="At a glance">
+  <div class="stats reveal fx-kids" id="stats" data-list aria-label="At a glance">
     <div><b data-count="15" data-suffix=" years">15 years</b><span>Breeding Cavaliers</span></div>
     <div><b data-count="100" data-suffix="+">100+</b><span>Puppies raised</span></div>
     <div><b>Excellent</b><span>Health testing rating on Good Dog</span></div>
@@ -446,7 +497,7 @@ section .eyebrow{margin-bottom:8px}
         <p>I'm Laura Tsekhmister, the breeder behind Brave Heart. I brought more than a decade of European breeding experience to the US, and I keep learning through specialized seminars on canine reproduction, preservation breeding, and structure and conformation. Understanding the science behind a well-made dog is what led me to purposeful breeding.</p>
         <p>Our goal is simple: healthy, structurally sound, beautiful Cavaliers with sweet temperaments. Our breeding dogs live in our home, and Eugene and I stay in touch with every family long after their puppy goes home.</p>
       </div>
-      <dl class="factlist" id="facts" data-list>
+      <dl class="factlist fx-kids" id="facts" data-list>
         <div><dt>Location</dt><dd>Bonney Lake, WA</dd></div>
         <div><dt>Colors</dt><dd>Blenheim and tri-color</dd></div>
         <div><dt>Where our dogs live</dt><dd>In our home</dd></div>
@@ -463,7 +514,7 @@ section .eyebrow{margin-bottom:8px}
           <p><span data-c="about.showText">At American Kennel Club conformation shows, expert judges evaluate each dog against the official breed standard for structure, movement, and temperament. Our dogs compete and win there, so your puppy comes from parents that judges have confirmed are excellent examples of the breed.</span> <a href="https://www.akc.org/sports/conformation/" target="_blank" rel="noopener">How AKC dog shows work ↗</a></p>
         </div>
       </div>
-      <div class="dogs" id="dogs" data-list>
+      <div class="dogs fx-kids" id="dogs" data-list>
         <div class="dog"><span class="role">Our stud · Imported from Hungary</span><h3>Snowflake Harmony of Life</h3><div class="wins"><span>Group 3rd, Best of Owner-Handler Toy Group</span><span>Multiple Winners Dog</span><span>Multiple Best of Winners</span></div><p>European bloodlines from a top Hungarian kennel. A compact, elegant male of about 13 lbs with a soft, affectionate nature.</p></div>
         <div class="dog"><span class="role">Born in our home</span><h3>Eleanor Queen of Hearts</h3><div class="wins"><span>Best in Show Puppy at her first AKC show</span><span>2 majors by 7 months old</span></div><p>A well-balanced, sweet, and friendly girl, and a proud example of what our program produces.</p></div>
       </div>
@@ -502,7 +553,7 @@ section .eyebrow{margin-bottom:8px}
       <div class="raised-body">
       <h3 data-c="health.raisedTitle">Raised to be confident</h3>
       <p class="lede" style="margin:0" data-c="health.raisedText">Puppies are handled every day and introduced to the experiences they will meet in a family home.</p>
-      <div class="chips" id="raisedChips" data-list><span>Daily handling</span><span>Household sounds</span><span>Car rides</span><span>New places</span><span>Scent introduction</span><span>Other dogs</span></div>
+      <div class="chips fx-kids" id="raisedChips" data-list><span>Daily handling</span><span>Household sounds</span><span>Car rides</span><span>New places</span><span>Scent introduction</span><span>Other dogs</span></div>
       </div>
     </div>
   </section>
@@ -544,12 +595,12 @@ section .eyebrow{margin-bottom:8px}
       <p class="eyebrow" data-c="contact.eyebrow">Get in touch</p><h2 id="contactTitle" data-c="contact.title">Contact</h2>
       <p class="lede" data-c="contact.intro">For questions about a puppy or your application. Pick-up is in Bonney Lake, at Seattle–Tacoma Airport, or in SeaTac, and drop-off can be arranged.</p>
     </div>
-    <div class="contact reveal" id="contactCards" data-list>
+    <div class="contact reveal fx-kids" id="contactCards" data-list>
       <div class="ccard"><span class="who">Eugene</span><span class="num">206-255-2007</span><span class="how">Calls and text messages</span><button class="copy" type="button" data-copy="206-255-2007">Copy number</button></div>
       <div class="ccard"><span class="who">Laura</span><span class="num">360-702-2367</span><span class="how">Text messages only</span><button class="copy" type="button" data-copy="360-702-2367">Copy number</button></div>
       <div class="ccard"><span class="who">Email</span><span class="num">braveheartcavaliers@gmail.com</span><span class="how">Applications and questions</span><button class="copy" type="button" data-copy="braveheartcavaliers@gmail.com">Copy email</button></div>
     </div>
-    <div class="social reveal" id="socialRow" data-list>
+    <div class="social reveal fx-kids" id="socialRow" data-list>
       <span class="social-title" data-c="contact.socialTitle">Follow along</span>
       <a href="https://www.facebook.com/share/1BS3om3SuC/" target="_blank" rel="noopener"><b>Facebook</b><span>Photos and updates</span><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
       <a href="https://www.instagram.com/_laura_tsekhmister_/" target="_blank" rel="noopener"><b>Instagram</b><span>@_laura_tsekhmister_</span><svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
@@ -666,7 +717,7 @@ section .eyebrow{margin-bottom:8px}
    Laura edits those files in Pages CMS, so nothing here needs changing. */
 let PUPPIES = [], REVIEWS = [], SETTINGS = {}, CONTENT = {};
 document.documentElement.classList.add('cms-loading');
-setTimeout(() => document.documentElement.classList.remove('cms-loading'), 2500); // never hide text for long
+setTimeout(() => { document.documentElement.classList.remove('cms-loading'); if (typeof startHero === 'function') startHero(); }, 2500); // never hide text for long
 const CONTENT_FILES = ['home', 'gallery-section', 'puppies-section', 'about', 'health', 'process', 'reviews-section', 'contact', 'application', 'form', 'footer'];
 const contentValue = path => path.split('.').reduce((o, k) => (o && typeof o === 'object') ? o[k] : undefined, CONTENT);
 const txt = (path, fallback) => { const v = contentValue(path); return (typeof v === 'string' && v.trim()) ? v.trim() : fallback; };
@@ -772,7 +823,7 @@ $('lb').addEventListener('click', e => { if (e.target === $('lb')) $('lb').close
 let GALLERY = [];
 function renderGallery(){
   const items = GALLERY.filter(g => g && g.photo).map(g => ({ url: String(g.photo).trim().replace(/^\/+/, ''), caption: String(g.caption || '').trim() }));
-  $('galGrid').innerHTML = items.map((g, i) => `<button type="button" data-gi="${i}"><img src="${esc(g.url)}" alt="${esc(g.caption || 'Brave Heart Cavalier')}" loading="lazy">${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ''}</button>`).join('');
+  $('galGrid').innerHTML = items.map((g, i) => `<button type="button" data-gi="${i}" style="--i:${Math.min(i, 16)}"><img src="${esc(g.url)}" alt="${esc(g.caption || 'Brave Heart Cavalier')}" loading="lazy">${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ''}</button>`).join('');
   $('galEmpty').hidden = items.length > 0;
   renderGallery.items = items;
 }
@@ -1287,6 +1338,57 @@ function onScroll(){
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
+
+/* ---------- motion effects ---------- */
+const FX = !reduceMotion;
+function indexKids(){
+  document.querySelectorAll('.fx-kids').forEach(box => [...box.children].forEach((c, i) => c.style.setProperty('--i', Math.min(i, 12))));
+  document.querySelectorAll('.intro > div > *').forEach((c, i) => c.style.setProperty('--i', i));
+}
+function splitHeadline(){
+  const h = document.querySelector('.intro h1'); if (!h || h.dataset.split) return;
+  const text = h.textContent.trim(); h.dataset.split = '1'; h.setAttribute('aria-label', text);
+  h.innerHTML = text.split(/\s+/).map((w, i) => `<span class="w" aria-hidden="true"><span style="--w:${i}">${esc(w)}</span></span>`).join(' ');
+}
+function softImages(root){
+  if (!FX) return;
+  (root || document).querySelectorAll('main img, .wrap img, #galGrid img').forEach(img => {
+    if (img.closest('.photo') || img.id === 'lbImg' || img.classList.contains('fx-img')) return;
+    img.classList.add('fx-img');
+    const done = () => img.classList.add('loaded');
+    if (img.complete && img.naturalWidth) done(); else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
+    setTimeout(done, 4000); // never leave a photo invisible
+  });
+}
+let heroStarted = false;
+function startHero(){
+  if (heroStarted) return; heroStarted = true;
+  if (FX) splitHeadline();
+  indexKids();
+  requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('hero-in')));
+  setTimeout(() => document.documentElement.classList.add('hero-done'), 2200);
+}
+/* scroll-linked: progress bar, hero parallax, floating About photo */
+const bar = $('scrollBar'), heroImgEl = $('heroImg'), floatPh = document.querySelector('.ph-second');
+let ticking = false;
+function fxFrame(){
+  ticking = false;
+  const max = document.documentElement.scrollHeight - innerHeight;
+  bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+  if (!FX) return;
+  if (scrollY < innerHeight * 1.2) document.documentElement.style.setProperty('--py', (scrollY * 0.06).toFixed(1) + 'px');
+  if (floatPh) { const r = floatPh.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) floatPh.style.setProperty('--float', ((innerHeight / 2 - (r.top + r.height / 2)) * 0.08).toFixed(1) + 'px'); }
+}
+let scrollTimer;
+addEventListener('scroll', () => {
+  if (!ticking) { ticking = true; requestAnimationFrame(fxFrame); }
+  document.documentElement.classList.add('fx-scrolling'); clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => document.documentElement.classList.remove('fx-scrolling'), 200);
+}, { passive: true });
+addEventListener('resize', fxFrame);
+fxFrame();
+indexKids();
+
 /* ---------- start ---------- */
 buildForm(normalizeForm(DEFAULT_FORM));
 const draft = loadDraft();
@@ -1304,8 +1406,9 @@ async function getJSON(path, fallback){
   try { applyContent(); } catch (err) { console.error(err); }
   try { const f = normalizeForm(CONTENT.form); if (f) buildForm(f); } catch (err) { console.error(err); }
   document.documentElement.classList.remove('cms-loading');
+  startHero(); softImages();
   [PUPPIES, REVIEWS, SETTINGS, GALLERY] = await Promise.all([getJSON('data/puppies.json', []), getJSON('data/reviews.json', []), getJSON('data/settings.json', {}), getJSON('data/gallery.json', [])]);
-  GALLERY = Array.isArray(GALLERY) ? GALLERY : []; renderGallery();
+  GALLERY = Array.isArray(GALLERY) ? GALLERY : []; renderGallery(); softImages();
   if (location.hash === '#gallery') openGallery();
   if (!Array.isArray(PUPPIES)) PUPPIES = [];
   REVIEWS = Array.isArray(REVIEWS) ? REVIEWS.filter(r => r && r.text) : [];
@@ -1316,6 +1419,7 @@ async function getJSON(path, fallback){
   syncConditionals();
   if (REVIEWS.length) { $('revTotal').textContent = `${REVIEWS.length} verified owner stories`; renderReview(); revAuto(); }
   else { $('reviews').hidden = true; document.querySelectorAll('a[href="#reviews"]').forEach(a => a.hidden = true); }
+  indexKids(); softImages();
   observeReveals();
 })();
 </script>
